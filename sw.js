@@ -3,7 +3,7 @@
    - La app (index.html) y la ruta (ruta.json): primero red, si no hay, la copia guardada.
    - Iconos y tipografías: copia guardada, y se refresca en segundo plano.
    - GitHub (publicar o leer la ruta en directo) nunca pasa por aquí. */
-const CACHE = "hann26-v15";
+const CACHE = "hann26-v16";
 const CORE = ["./", "index.html", "manifest.webmanifest", "favicon.ico",
   "apple-touch-icon.png", "icon-192.png", "icon-512.png", "icon-maskable-512.png",
   "img/rathaus.jpg", "img/kramer.jpg", "img/herrenhausen.jpg", "img/ernstaugust.jpg", "img/altesrathaus.jpg", "img/oper.jpg", "img/leibnizhaus.jpg",

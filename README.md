@@ -1,6 +1,6 @@
 # Hannover 26 · Garante e Intecat
 
-App móvil del viaje de cortesía a Hannover (25–27 de noviembre de 2026). **Garante** (Grupo WERTGARANTIE) organiza; **Intecat** es la invitada. Viajan Rosa Ana (Garante, desde Madrid; Lars, de Garante, también es organizador y viaja por su cuenta) y Óscar y Raquel (Intecat, desde Barcelona). Hotel: me and all hotel Hannover, Aegidientorplatz 3.
+App móvil del viaje de cortesía a Hannover (25–27 de noviembre de 2026). **Garante** (Grupo WERTGARANTIE) organiza; **Intecat** es la invitada. Viajan Rosa Ana (Garante, desde Madrid; organiza junto a Lars, también de Garante) y Óscar y Raquel (Intecat, desde Barcelona). Hotel: me and all hotel Hannover, Aegidientorplatz 3.
 
 La ruta es común para los tres y solo la cambian los organizadores, **Rosa Ana y Lars**. Desde el móvil también pueden cambiar el hotel, la hora de la visita a WERTGARANTIE, avisos sobre los vuelos y el enlace del grupo de WhatsApp (Guía → Reservas y vuelos), y todo se publica junto. Los vuelos y asientos van fijos en la app.
 

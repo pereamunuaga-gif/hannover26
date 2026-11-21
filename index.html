@@ -1271,7 +1271,7 @@ const DAYS = {
 };
 const ALL_DATES = Object.keys(DAYS);
 const GROUPS = {
-  G:{members:["Rosa Ana","Lars"],from:"2026-11-25",to:"2026-11-27",co:"Garante",desc:"Garante · Grupo WERTGARANTIE · anfitriones y organización (Lars viaja por su cuenta)"},
+  G:{members:["Rosa Ana","Lars"],from:"2026-11-25",to:"2026-11-27",co:"Garante",desc:"Garante · Grupo WERTGARANTIE · anfitriones y organización"},
   I:{members:["Óscar","Raquel"],from:"2026-11-25",to:"2026-11-27",co:"Intecat",desc:"Intecat · invitados (salen desde Barcelona)"}
 };
 const PEOPLE = {}; Object.keys(GROUPS).forEach(g=>GROUPS[g].members.forEach(n=>PEOPLE[n]=g));
@@ -1313,19 +1313,19 @@ const ZN = {}; ZONES.forEach(z=>ZN[z.id]=z);
 const ITEMS = [
   /* Fijos */
   {id:"enc25",z:"aegi",n:"Encuentro en el vestíbulo del hotel",c:0,pp:"Punto de encuentro",dur:"10 min",atHotel:true,
-   fixed:{d:"2026-11-25",h:"19:00",t:"19:00 · salida conjunta hacia el restaurante Schorse"},
+   fixed:{d:"2026-11-25",h:"19:00",t:"19:00 · punto de encuentro en el vestíbulo; salida conjunta hacia el restaurante"},
    tip:"me and all hotel Hannover, Aegidientorplatz 3. Todas las salidas del grupo se hacen desde el vestíbulo.",q:"me and all hotel Hannover, Aegidientorplatz 3"},
   {id:"schorse",z:"alt",ll:[52.3693,9.7334],n:"Cena de bienvenida en Schorse",c:0,pp:"Invitación",dur:"2 h",
-   fixed:{d:"2026-11-25",h:"19:30",t:"19:30 · cocina de inspiración francesa"},
+   fixed:{d:"2026-11-25",h:"19:30",t:"19:30 · cena conjunta de bienvenida"},
    tip:"Restaurante Schorse, en el edificio moderno del Leineschloss, sede del Parlamento de Baja Sajonia, junto al río Leine (Hannah-Arendt-Platz 1). Se llega a pie desde el hotel.",q:"Schorse im Leineschloss, Hannah-Arendt-Platz 1, 30159 Hannover"},
   {id:"enc26",z:"aegi",n:"Encuentro en el vestíbulo del hotel",c:0,pp:"Punto de encuentro",dur:"5 min",atHotel:true,
-   fixed:{d:"2026-11-26",h:"10:30",t:"10:30 · salimos juntos hacia la sede central"},
+   fixed:{d:"2026-11-26",h:"10:30",t:"10:30 · punto de encuentro en el vestíbulo del hotel me and all Hannover"},
    tip:"Vestíbulo del me and all hotel Hannover, Aegidientorplatz 3.",q:"me and all hotel Hannover, Aegidientorplatz 3"},
   {id:"wg",z:"aegi",ll:[52.3701,9.7404],n:"Visita a la sede central del Grupo WERTGARANTIE",c:0,pp:"Invitación",dur:"1 h 30 min",meeting:true,
    fixed:{d:"2026-11-26",h:"10:30",e:"12:00",t:"10:30–12:00 · visita a las instalaciones y encuentro con el equipo"},
    tip:"Breite Straße 8, a unos minutos a pie del hotel. La casa matriz de Garante: Rosa Ana y Lars reciben a Óscar y Raquel. Visita a las instalaciones y encuentro con el equipo.",q:"WERTGARANTIE Breite Straße 8, 30159 Hannover"},
-  {id:"xmas",z:"alt",ll:[52.3721,9.7343],n:"Mercadillo navideño del casco antiguo",c:0,dur:"3 h",special:"xmas",market:true,
-   fixed:{d:"2026-11-26",h:"18:00",e:"19:45",t:"18:00–19:45 · paseo, mercado histórico, aldea finlandesa y Glühwein"},
+  {id:"xmas",z:"alt",ll:[52.3721,9.7343],n:"Visita al mercado de Navidad",c:0,dur:"3 h",special:"xmas",market:true,
+   fixed:{d:"2026-11-26",h:"18:00",e:"19:45",t:"18:00–19:45 · mercado tradicional, mercado histórico, pueblo navideño finlandés y degustación de Glühwein y especialidades locales"},
    tip:"De la Marktkirche al Leine y al Ballhof: más de 150 puestos, el abeto gigante de 19 m con 3.000 luces y espectáculos de fuego a las 18:00 y a las 20:00. Media hora antes del cierre, el sereno toca la campana. Probad el Glühwein (vino caliente) y la Bratwurst.",q:"Weihnachtsmarkt Marktkirche Hannover"},
   /* Casco antiguo */
   {id:"marktkirche",z:"alt",ll:[52.3717,9.7356],n:"Marktkirche St. Georgii et Jacobi",c:0,dur:"40 min",
@@ -1357,7 +1357,6 @@ const ITEMS = [
    tip:"Puestos de comida de todo tipo, de la Currywurst al pescado del norte. Se come de pie o en barra, rápido y bien. Muy animado a mediodía.",q:"Markthalle Hannover"},
   /* Rathaus y Aegi */
   {id:"rathaus",z:"aegi",ll:[52.3673,9.7386],n:"Neues Rathaus (vestíbulo y maquetas)",c:0,dur:"45 min",special:"dome",
-   fixed:{d:"2026-11-26",h:"15:15",e:"16:30",t:"15:15–16:30 · paseo por el centro histórico: Neues Rathaus, Aegidienkirche y casco antiguo"},
    tip:"Palacio-ayuntamiento de 1913. Cuando el káiser Guillermo II lo inauguró, el alcalde Tramm presumió: «¡10 millones de marcos, Majestad, y todo pagado al contado!». Dentro, cuatro maquetas de la ciudad: 1689, 1939, 1945 y hoy. Detrás, el Maschpark.",q:"Neues Rathaus Hannover"},
   {id:"aegi",z:"aegi",ll:[52.3692,9.7386],n:"Aegidienkirche (memorial de guerra)",c:0,dur:"15 min",
    tip:"Iglesia que se dejó en ruinas tras los bombardeos de 1943 como memorial por la paz. En su torre, una campana regalada por Hiroshima.",q:"Aegidienkirche Hannover"},
@@ -1372,7 +1371,7 @@ const ITEMS = [
    tip:"Lago artificial de 1936 con 6 km de orilla. En invierno el paseo es tranquilo y el atardecer, temprano y bonito.",q:"Maschsee Nordufer Hannover"},
   /* Herrenhausen */
   {id:"grosser",z:"herr",ll:[52.3866,9.6987],n:"Jardines de Herrenhausen: Großer Garten y gruta",c:8,approx:true,dur:"1 h 10 min",special:"herr",
-   fixed:{d:"2026-11-26",h:"12:20",e:"13:30",t:"12:20–13:30 · en taxi desde la sede a las 12:00; vuelta al centro a las 13:30"},
+   fixed:{d:"2026-11-26",h:"12:20",e:"13:30",t:"12:20–13:30 · Gran Jardín (Großer Garten), gruta de Niki de Saint Phalle y vistas del palacio"},
    tip:"El jardín barroco de la electora Sofía (1676–1714). La entrada general incluye la gruta decorada por Niki de Saint Phalle, el museo del palacio y el Berggarten. Stadtbahn U4 o U5 hasta Herrenhäuser Gärten.",q:"Großer Garten Herrenhausen"},
   {id:"berggarten",z:"herr",ll:[52.3916,9.7034],n:"Berggarten y mausoleo de los Güelfos",c:0,pp:"Incluido",dur:"45 min",special:"herr",
    tip:"Jardín botánico con invernaderos tropicales. Al fondo de la avenida, el mausoleo donde descansan Jorge I y otros miembros de la casa güelfa trasladados aquí.",q:"Berggarten Hannover"},
@@ -1394,13 +1393,22 @@ const ITEMS = [
    tip:"Espectáculo de variedades de invierno en la Orangerie del palacio, de noviembre a enero. Plan de noche alternativo si apetece algo especial.",q:"Orangerie Herrenhausen"},
   /* Programa oficial (documento de Garante) */
   {id:"stav",z:"aegi",ll:[52.3682,9.7414],n:"Almuerzo en Ständige Vertretung",c:0,pp:"Invitación",dur:"1 h 15 min",
-   fixed:{d:"2026-11-26",h:"14:00",e:"15:15",t:"14:00–15:15 · el mismo restaurante de la visita anterior"},
+   fixed:{d:"2026-11-26",h:"14:00",e:"15:15",t:"14:00–15:15 · almuerzo conjunto en un restaurante del centro"},
    tip:"Friedrichswall 10, en la Aegidientorplatz, junto al hotel. Su nombre recuerda a las «representaciones permanentes» que las dos Alemanias tuvieron en lugar de embajadas, y sus paredes están llenas de fotos de políticos.",q:"Ständige Vertretung, Friedrichswall 10, 30159 Hannover"},
+  {id:"traslado",z:"herr",n:"Traslado a Herrenhausen",c:0,pp:"Taxi",dur:"20 min",
+   fixed:{d:"2026-11-26",h:"12:00",e:"12:20",t:"12:00–12:20 · en taxi a los jardines reales"},
+   tip:"Desplazamiento en taxi desde la sede central hasta los Jardines Reales de Herrenhausen.",q:"Großer Garten Herrenhausen"},
+  {id:"regreso",z:"aegi",n:"Regreso al centro de Hannover",c:0,pp:"Taxi",dur:"20 min",
+   fixed:{d:"2026-11-26",h:"13:30",e:"13:50",t:"13:30–13:50 · vuelta al centro para el almuerzo"},
+   tip:"Regreso en taxi desde Herrenhausen al centro de Hannover.",q:"Aegidientorplatz Hannover"},
+  {id:"paseo",z:"aegi",n:"Paseo por el centro histórico",c:0,pp:"A pie",dur:"1 h 15 min",
+   fixed:{d:"2026-11-26",h:"15:15",e:"16:30",t:"15:15–16:30 · Neues Rathaus, Aegidienkirche y casco antiguo"},
+   tip:"Nuevo Ayuntamiento (Neues Rathaus); iglesia de San Egidio (Aegidienkirche), monumento conmemorativo de la Segunda Guerra Mundial; y casco antiguo, con sus edificios históricos y sus casas tradicionales de entramado de madera. Las tres paradas siguen a continuación.",q:"Neues Rathaus Hannover"},
   {id:"descanso",z:"aegi",n:"Tiempo libre y descanso en el hotel",c:0,pp:"Libre",dur:"1 h 30 min",atHotel:true,
    fixed:{d:"2026-11-26",h:"16:30",e:"18:00",t:"16:30–18:00 · antes del mercado de Navidad"},
    tip:"Para entrar en calor y abrigarse antes de la noche. Anochece hacia las 16:15.",q:"me and all hotel Hannover, Aegidientorplatz 3"},
-  {id:"xmascena",z:"alt",n:"Cena en los puestos del mercado de Navidad",c:0,pp:"Invitación",dur:"1 h 30 min",market:true,
-   fixed:{d:"2026-11-26",h:"20:00",t:"20:00 · como en la visita anterior"},
+  {id:"xmascena",z:"alt",n:"Cena conjunta en el mercadillo",c:0,pp:"Invitación",dur:"1 h 30 min",market:true,
+   fixed:{d:"2026-11-26",h:"20:00",t:"20:00 · cena conjunta en los puestos del mercado de Navidad"},
    tip:"Bratwurst, Grünkohl, salmón a la llama en la aldea finlandesa y Glühwein. A las 20:00, segundo espectáculo de fuego.",q:"Weihnachtsmarkt Marktkirche Hannover"},
   {id:"checkout",z:"aegi",n:"Check-out del hotel",c:0,pp:"Hasta las 11:00",dur:"15 min",atHotel:true,
    fixed:{d:"2026-11-27",t:"Antes de salir hacia el aeropuerto · como tarde a las 11:00"},
@@ -1411,7 +1419,7 @@ const IT = {}; ITEMS.forEach(x=>IT[x.id]=x);
 /* Ruta de partida, hasta que un organizador publique otra */
 const ROUTE0 = {
   "2026-11-25":["enc25","schorse"],
-  "2026-11-26":["enc26","wg","grosser","stav","rathaus","aegi","kramer","descanso","xmas","finn","histmarkt","xmascena"],
+  "2026-11-26":["enc26","wg","traslado","grosser","regreso","stav","paseo","rathaus","aegi","kramer","descanso","xmas","finn","histmarkt","xmascena"],
   "2026-11-27":["checkout"]
 };
 
@@ -1423,7 +1431,7 @@ const TRIP0 = {hotel:"me and all hotel Hannover",hotelAddr:"Aegidientorplatz 3, 
    ========================================================= */
 const SYNC_CFG = {owner:"pereamunuaga-gif", repo:"hannover26", branch:"main", path:"ruta.json"};
 const COMMANDERS = ["Rosa Ana","Lars"];
-/* Rosa Ana viaja con los clientes (vuelos y coordinación). Lars también viaja, pero por su cuenta: sus vuelos no están en la app */
+/* Rosa Ana comparte vuelos con los clientes (avisos de coordinación); Lars no tiene vuelos en la app */
 const isRosa=()=>S.person==="Rosa Ana";
 const SOLO={"Lars":1};
 const isSolo=()=>!!SOLO[S.person];
@@ -1576,7 +1584,9 @@ function ensureFixed(p){
   ITEMS.forEach(it=>{ if(!it.fixed||ds.indexOf(it.fixed.d)<0) return;
     Object.keys(p).forEach(d=>{ if(d!==it.fixed.d&&p[d]) p[d]=p[d].filter(x=>x!==it.id) });
     const arr=p[it.fixed.d]||(p[it.fixed.d]=[]); if(arr.indexOf(it.id)>=0) return;
-    const h=it.fixed.h||"99"; let k=arr.findIndex(x=>IT[x]&&IT[x].fixed&&(IT[x].fixed.h||"99")>h); if(k<0) k=arr.length; arr.splice(k,0,it.id);
+    /* Primero según el orden del programa oficial (ROUTE0); si no, por la hora */
+    const ref=ROUTE0[it.fixed.d]||[], ri=ref.indexOf(it.id); let k=ri>=0?arr.findIndex(x=>ref.indexOf(x)>ri):-1;
+    const h=it.fixed.h||"99"; if(k<0) k=arr.findIndex(x=>IT[x]&&IT[x].fixed&&(IT[x].fixed.h||"99")>h); if(k<0) k=arr.length; arr.splice(k,0,it.id);
   });
 }
 const myDates=()=>ALL_DATES.filter(d=>d>=G().from&&d<=G().to);
@@ -1715,9 +1725,9 @@ function renderInicio(){
   $("#heroTitle").textContent=S.person?(({"Rosa Ana":1,Raquel:1}[S.person]?"Querida ":"Querido ")+S.person+","):"Herzlich willkommen";
   $("#heroLede").textContent=S.person?(grp()==="G"?
       (isRosa()?
-        ("Acompañas a "+other.members.join(" y ")+", de Intecat, en su visita a la casa matriz del Grupo WERTGARANTIE. Os encontráis en Fráncfort y llegáis juntos a Hannover en el LH44; Lars, que viaja por su cuenta, completa la organización. En esta edición tienes los vuelos de todos, el programa y el modo organizador para avisar al grupo."):
-        ("Junto a Rosa Ana acompañas a "+other.members.join(" y ")+", de Intecat, en su visita a la casa matriz del Grupo WERTGARANTIE. Viajas por tu cuenta: aquí tienes los vuelos de Rosa Ana y de los clientes para coordinaros, el programa y el modo organizador para avisar al grupo.")):
-      ("Garante, del Grupo WERTGARANTIE, os invita a Hannover, su casa matriz. Viajas con "+companions().join(", ")+"; Rosa Ana y Lars, de Garante, serán vuestros anfitriones. Rosa Ana coincide con vosotros en el vuelo de llegada; Lars viaja por su cuenta. Esta pequeña edición reúne vuelos, hotel, programa y todo lo demás.")):
+        ("Acompañas a "+other.members.join(" y ")+", de Intecat, en su visita a la casa matriz del Grupo WERTGARANTIE. Os encontráis en Fráncfort y llegáis juntos a Hannover en el LH44. Junto a Lars, completas la organización: en esta edición tienes los vuelos de todos, el programa y el modo organizador para avisar al grupo."):
+        ("Junto a Rosa Ana acompañas a "+other.members.join(" y ")+", de Intecat, en su visita a la casa matriz del Grupo WERTGARANTIE. Aquí tienes los vuelos de Rosa Ana y de los clientes para coordinaros, el programa y el modo organizador para avisar al grupo.")):
+      ("Garante, del Grupo WERTGARANTIE, os invita a Hannover, su casa matriz. Viajas con "+companions().join(", ")+"; Rosa Ana y Lars, de Garante, serán vuestros anfitriones. Rosa Ana coincide con vosotros en el vuelo de llegada. Esta pequeña edición reúne vuelos, hotel, programa y todo lo demás.")):
     "Garante invita a Intecat a la ciudad de los Güelfos. Toca tu nombre arriba a la derecha para ver tus vuelos y personalizar la edición.";
   $("#groups").innerHTML=Object.keys(GROUPS).map(k=>{
     const gg=GROUPS[k];
@@ -1802,9 +1812,9 @@ function flightStop(dir){
     return '<div class="tip">'+(multi?'<b>'+(dir==="ida"?"Desde ":"Hacia ")+esc(f.from)+':</b> ':'')+b.legs.map(l=>esc(l[0]+" · "+l[4]+" "+hm(l[1])+" → "+l[6]+" "+hm(l[2]))).join(" · ")+'</div>'; }).join("");
   const btn='<div class="links"><button class="btn small" type="button" data-goflights>Vuelos y asientos</button></div>';
   if(dir==="ida") return '<li class="stop fixed"><span class="n">✈</span><div class="hh num">14:20 · llegada</div><div class="t"><h3>Llegada a Hannover</h3></div>'+body+
-    '<div class="tip">'+(isSolo()?'Tú viajas por tu cuenta. Rosa Ana, Óscar y Raquel llegan juntos en el LH44 desde Fráncfort.':'Todos llegáis juntos en el LH44 desde Fráncfort.')+(isRosa()?' Óscar y Raquel van en los asientos 14D y 14E.':'')+' Al hotel: en taxi (20–25 min) o en S5 hasta la estación central y de allí metro o taxi hasta Aegidientorplatz. Check-in desde las 15:00 y tarde libre para descansar.</div>'+btn+'</li>';
+    '<div class="tip">'+(isSolo()?'Rosa Ana, Óscar y Raquel llegan juntos en el LH44 desde Fráncfort.':'Todos llegáis juntos en el LH44 desde Fráncfort.')+(isRosa()?' Óscar y Raquel van en los asientos 14D y 14E.':'')+' Al hotel: en taxi (20–25 min) o en S5 hasta la estación central y de allí metro o taxi hasta Aegidientorplatz. Check-in desde las 15:00 y tarde libre para descansar.</div>'+btn+'</li>';
   const lv=gs.map(g=>FLIGHTS[g].leave+(multi?" ("+FLIGHTS[g].from+")":"")).join(" · ");
-  const soloNote=isSolo()?'<div class="tip">Tú viajas por tu cuenta; estos son los horarios de salida de Rosa Ana y de los clientes.</div>':'';
+  const soloNote=isSolo()?'<div class="tip">Horarios de salida de Rosa Ana y de los clientes.</div>':'';
   return '<li class="stop fixed"><span class="n">✈</span><div class="hh num">'+esc(lv)+' · al aeropuerto</div><div class="t"><h3>Salida hacia el aeropuerto</h3></div>'+soloNote+body+
     '<div class="tip">Taxi del hotel al aeropuerto: unos 20–25 minutos. Estad allí al menos 1 h 30 min antes de la salida.'+(isRosa()?' Puedes compartir el taxi con Óscar y Raquel ajustándolo a su vuelo (salida hacia las 07:30).':'')+'</div>'+btn+'</li>';
 }
@@ -2131,7 +2141,7 @@ function flightsHTML(){
         '<div class="fl-f"><b>'+esc(b.ci)+'</b>, en la web o la app de '+esc(b.al)+'.'+(b.note?' '+esc(b.note):'')+'</div></div>';
     });
   });
-  if(isSolo()) h+='<div class="note info">Viajas por tu cuenta: tus vuelos no figuran en la app. Estos son los de Rosa Ana y los clientes, para coordinaros.</div>';
+  if(isSolo()) h+='<div class="note info">Estos son los vuelos de Rosa Ana y de los clientes, para coordinaros.</div>';
   if(isRosa()) h+='<div class="note warn"><b>Coordinación (solo organización).</b> A la ida coincides con Óscar y Raquel en el LH44 (fila 14): llegáis juntos a las 14:20 y podéis hacer juntos el traslado. A la vuelta los horarios no coinciden: se puede compartir el taxi ajustándolo a su vuelo (LX815, salida del hotel hacia las 07:30).</div>';
   h+='<div class="note info">Equipaje por persona: 1 objeto personal, 1 maleta de cabina de hasta 8 kg y 1 facturada de hasta 23 kg. Todas las horas son locales: Alemania y Suiza tienen la misma hora que la España peninsular. Los modelos de avión y las terminales pueden cambiar; revisad la tarjeta de embarque.</div>';
   return h;
@@ -2270,7 +2280,7 @@ function renderSyncBar(){
 function renderCmd(){
   const t=syncTarget();
   $("#cmdBox").innerHTML=
-    '<p>Rosa Ana y Lars organizan la ruta común. Con el modo organizador activo puedes añadir, quitar y reordenar visitas, rellenar vuelos, hotel y hora de la visita (en Reservas), y al pulsar «Publicar para todos» todos lo verán en unos minutos.</p>'+
+    '<p>Rosa Ana y Lars organizan la ruta común. Con el modo organizador activo puedes añadir, quitar y reordenar visitas, cambiar el hotel, la hora de la visita, avisos sobre los vuelos y el enlace del grupo (en Reservas y vuelos), y al pulsar «Publicar para todos» todos lo verán en unos minutos.</p>'+
     '<div class="note '+(t?"ok":"warn")+'">'+(t?'Repositorio conectado: <b>'+esc(t.o+"/"+t.r)+'</b>':'La app aún no está conectada a un repositorio de GitHub. Se detecta sola al abrirla desde GitHub Pages.')+'</div>'+
     '<div class="note '+(S.token?"ok":"info")+'">'+(S.token?'Clave guardada en este móvil. Modo organizador <b>activo</b>.':'Modo organizador <b>inactivo</b>: falta tu clave de GitHub.')+'</div>'+
     '<div class="field"><label for="tokIn">Clave de GitHub (token)</label><input id="tokIn" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="github_pat_…"></div>'+
@@ -2492,7 +2502,7 @@ const TUT=[
  {ill:"clover",e:"Paso 1 · Bienvenida",t:"Una app para el viaje",items:[
   ["Esta pequeña edición reúne todo el viaje a Hannover: el programa día a día, el plano, la historia de la ciudad y sus cervecerías, la guía práctica y frases en alemán.",""],
   ["Lo primero es decir quién eres. Tu nombre aparece arriba a la derecha; tócalo si quieres cambiar de persona.",'<span class="btn small green">RA&nbsp; Rosa Ana</span>'],
-  ["Rosa Ana y Lars, de Garante, son los anfitriones y la organización (Lars viaja por su cuenta); Óscar y Raquel, de Intecat, los invitados. Del miércoles 25 al viernes 27 de noviembre.",""],
+  ["Rosa Ana y Lars, de Garante, son los anfitriones y la organización; Óscar y Raquel, de Intecat, los invitados. Del miércoles 25 al viernes 27 de noviembre.",""],
   ["«Índice», arriba a la izquierda, abre el sumario. Al final de cada sección, «Siguiente» pasa la página.",'<span class="btn small">☰ Índice</span><span class="btn small">Siguiente →</span>']]},
  {ill:"stall",e:"Paso 2 · Inicio",t:"Tu resumen del viaje",items:[
   ["La portada presenta a los viajeros: Garante como anfitriona e Intecat como invitada. Tu empresa aparece destacada en rojo.",""],
