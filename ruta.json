@@ -1,0 +1,19 @@
+{
+ "v": 1,
+ "updatedAt": "2026-11-21T12:00:00.000Z",
+ "updatedBy": "Jorge",
+ "notice": null,
+ "route": {
+  "2026-11-25": ["enc25", "schorse"],
+  "2026-11-26": ["enc26", "wg", "grosser", "stav", "rathaus", "aegi", "kramer", "descanso", "xmas", "finn", "histmarkt", "xmascena"],
+  "2026-11-27": ["checkout"]
+ },
+ "trip": {
+  "hotel": "me and all hotel Hannover",
+  "hotelAddr": "Aegidientorplatz 3, 30159 Hannover",
+  "out": "",
+  "back": "",
+  "meet": "Jueves 26 · 10:30 · salida desde el vestíbulo del hotel",
+  "wa": ""
+ }
+}
