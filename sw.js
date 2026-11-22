@@ -3,7 +3,7 @@
    - La app (index.html) y la ruta (ruta.json): primero red, si no hay, la copia guardada.
    - Iconos y tipografías: copia guardada, y se refresca en segundo plano.
    - GitHub (publicar o leer la ruta en directo) nunca pasa por aquí. */
-const CACHE = "hann26-v29";
+const CACHE = "hann26-v30";
 const CORE = ["./", "index.html", "manifest.webmanifest", "favicon.ico",
   "apple-touch-icon.png", "icon-192.png", "icon-512.png", "icon-maskable-512.png",
   "img/rathaus.jpg", "img/kramer.jpg", "img/herrenhausen.jpg", "img/ernstaugust.jpg", "img/altesrathaus.jpg", "img/oper.jpg", "img/leibnizhaus.jpg",
@@ -63,6 +63,8 @@ self.addEventListener("fetch", e => {
 
   // Calendarios (.ics): siempre en directo y nunca en la caché de la app
   if (url.pathname.endsWith(".ics")) return;
+  // Iconos de la app: siempre del servidor (si no, el iPhone puede añadir a inicio un icono antiguo guardado)
+  if (/(apple-touch-icon|icon-\d+|icon-maskable-\d+)\.png$|favicon\.ico$/.test(url.pathname)) { e.respondWith(networkFirst(req, null, 4000)); return; }
 
   // La app
   if (req.mode === "navigate" || url.pathname.endsWith("/") || url.pathname.endsWith("/index.html")) {
