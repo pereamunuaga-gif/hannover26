@@ -2583,8 +2583,24 @@ function deVoice(){
   return de.sort((a,b)=>score(b)-score(a))[0];
 }
 try{ if(window.speechSynthesis){ speechSynthesis.getVoices(); speechSynthesis.addEventListener&&speechSynthesis.addEventListener("voiceschanged",()=>{}); } }catch(e){}
-let curUtter=null;
+let curUtter=null, speechUnlocked=false;
 const IS_IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+/* Voz alemana instalada: en iPhone, «Anna» (de-DE) u otra de Alemania que esté en el propio móvil */
+function pickDe(){
+  const vs=(window.speechSynthesis&&speechSynthesis.getVoices())||[];
+  const de=vs.filter(x=>/^de([-_]|$)/i.test(x.lang));
+  if(!de.length) return null;
+  if(!IS_IOS) return deVoice();
+  return de.find(x=>/^anna/i.test(x.name)&&/^de[-_]DE/i.test(x.lang))||de.find(x=>/^de[-_]DE/i.test(x.lang)&&x.localService&&!/premium|enhanced|mejorad/i.test(x.name))||de.find(x=>/^de[-_]DE/i.test(x.lang))||de[0];
+}
+/* iOS solo deja hablar tras un toque: se «desbloquea» la voz con una frase vacía en el primer toque */
+function unlockSpeech(){
+  if(speechUnlocked||!window.speechSynthesis) return; speechUnlocked=true;
+  if(speechSynthesis.speaking||speechSynthesis.pending) return;   /* el primer toque ya era un altavoz */
+  try{ speechSynthesis.getVoices(); const u=new SpeechSynthesisUtterance(" "); u.volume=0; speechSynthesis.speak(u); }catch(e){}
+}
+document.addEventListener("touchend",unlockSpeech,{once:true,passive:true});
+document.addEventListener("click",unlockSpeech,{once:true});
 function speak(t){
   const s=window.speechSynthesis;
   if(!s||typeof SpeechSynthesisUtterance==="undefined") return toast("Este móvil no puede leer en voz alta desde la app");
@@ -2592,14 +2608,15 @@ function speak(t){
     if(s.speaking||s.pending) s.cancel();
     if(s.paused) s.resume();
     const u=new SpeechSynthesisUtterance(t.replace(/\s*\/\s*/g,". ").replace(/…/g,""));
-    u.lang="de-DE"; u.rate=IS_IOS?.9:.85; u.volume=1;
-    if(!IS_IOS){ const v=deVoice(); if(v) u.voice=v; }   /* en iPhone, la voz alemana del sistema: forzar una voz no instalada la deja muda */
+    u.lang="de-DE"; u.rate=IS_IOS?.9:.85; u.volume=1; u.pitch=1;
+    const v=pickDe(); if(v) u.voice=v;
     let started=false;
     u.onstart=()=>{ started=true; };
     u.onerror=e=>{ if(e&&e.error&&!/interrupted|canceled/.test(e.error)) toast("No se ha podido leer en voz alta ("+e.error+")"); };
     curUtter=u;   /* Safari pierde la frase si no se guarda una referencia */
     s.speak(u);
-    setTimeout(()=>{ if(!started&&!s.speaking) toast(IS_IOS?"No suena: sube el volumen con los botones laterales y revisa Ajustes → Accesibilidad → Contenido leído → Voces → Alemán":"No suena: sube el volumen o prueba en otro navegador"); },2500);
+    setTimeout(()=>{ if(!started&&!s.speaking){ const n=(s.getVoices()||[]).filter(x=>/^de/i.test(x.lang)).length;
+      toast(IS_IOS?"No suena (voces alemanas en el móvil: "+n+"). Revisa el modo silencio y Ajustes → Accesibilidad → Contenido leído → Voces → Alemán":"No suena (voces alemanas: "+n+"). Sube el volumen o prueba en otro navegador"); } },2500);
   }catch(e){ toast("Tu navegador no puede leer en voz alta"); }
 }
 function showBig(p){
