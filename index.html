@@ -2583,10 +2583,24 @@ function deVoice(){
   return de.sort((a,b)=>score(b)-score(a))[0];
 }
 try{ if(window.speechSynthesis){ speechSynthesis.getVoices(); speechSynthesis.addEventListener&&speechSynthesis.addEventListener("voiceschanged",()=>{}); } }catch(e){}
+let curUtter=null;
+const IS_IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 function speak(t){
-  try{const s=window.speechSynthesis; if(!s) return toast("Tu navegador no puede leer en voz alta"); s.cancel();
-    const u=new SpeechSynthesisUtterance(t.replace(/\s*\/\s*/g,". ").replace(/…/g,"")); u.lang="de-DE"; u.rate=.85;
-    const v=deVoice(); if(v) u.voice=v; s.speak(u);}catch(e){toast("Tu navegador no puede leer en voz alta")}
+  const s=window.speechSynthesis;
+  if(!s||typeof SpeechSynthesisUtterance==="undefined") return toast("Este móvil no puede leer en voz alta desde la app");
+  try{
+    if(s.speaking||s.pending) s.cancel();
+    if(s.paused) s.resume();
+    const u=new SpeechSynthesisUtterance(t.replace(/\s*\/\s*/g,". ").replace(/…/g,""));
+    u.lang="de-DE"; u.rate=IS_IOS?.9:.85; u.volume=1;
+    if(!IS_IOS){ const v=deVoice(); if(v) u.voice=v; }   /* en iPhone, la voz alemana del sistema: forzar una voz no instalada la deja muda */
+    let started=false;
+    u.onstart=()=>{ started=true; };
+    u.onerror=e=>{ if(e&&e.error&&!/interrupted|canceled/.test(e.error)) toast("No se ha podido leer en voz alta ("+e.error+")"); };
+    curUtter=u;   /* Safari pierde la frase si no se guarda una referencia */
+    s.speak(u);
+    setTimeout(()=>{ if(!started&&!s.speaking) toast(IS_IOS?"No suena: sube el volumen con los botones laterales y revisa Ajustes → Accesibilidad → Contenido leído → Voces → Alemán":"No suena: sube el volumen o prueba en otro navegador"); },2500);
+  }catch(e){ toast("Tu navegador no puede leer en voz alta"); }
 }
 function showBig(p){
   const el=document.createElement("div"); el.className="showcard"; el.setAttribute("role","dialog");
@@ -3055,9 +3069,10 @@ function addToCalendar(){
   const gcal="https://calendar.google.com/calendar/render?cid="+encodeURIComponent(webcal);
   const who=calProfile()==="grupo"?"el programa y los vuelos de todos":"el programa y tus vuelos";
   let body;
-  if(iOS) body='<ol class="calsteps"><li>Toca <b>«Abrir en Calendario»</b>. Se abrirá una página con la lista de citas.</li><li>Pulsa <b>«Añadir todo»</b> y elige el calendario (por ejemplo, «Casa» o «Trabajo»).</li></ol>'+
-    '<div class="row"><a class="btn primary" href="'+file+'" target="_blank" rel="noopener">'+ICON_CAL_JS+'Abrir en Calendario</a></div>'+
-    '<p class="caltip">¿No aparece «Añadir todo»? Usa <a href="'+webcal+'">Suscribirse al calendario</a>: se abre la app Calendario y se mantiene al día sola. En ese caso, desactiva «Eliminar alertas» para conservar los avisos.</p>';
+  if(iOS) body='<ol class="calsteps"><li>Toca <b>«Suscribirse en Calendario»</b> y confirma con <b>«Suscribirse»</b>.</li><li>En la pantalla siguiente, <b>desactiva «Eliminar alertas»</b> para conservar los avisos y pulsa <b>«Añadir»</b>.</li><li>Abre Calendario y ve al <b>25 de noviembre</b>: las citas aparecen en el calendario «Hannover 26».</li></ol>'+
+    '<div class="row"><a class="btn primary" href="'+webcal+'">'+ICON_CAL_JS+'Suscribirse en Calendario</a></div>'+
+    '<p class="caltip"><b>¿Prefieres copiarlas a tu calendario?</b> Toca <a href="'+file+'" target="_blank" rel="noopener">este enlace</a>; si se abre una página en blanco, pulsa el icono de la brújula (abajo a la derecha) para abrirla en Safari, y allí aparecerá «Añadir todo».</p>'+
+    '<p class="caltip">¿Ya te suscribiste y no ves nada? En Calendario, toca «Calendarios» abajo y comprueba que «Hannover 26» está marcado; las citas están del 25 al 27 de noviembre.</p>';
   else if(android) body='<ol class="calsteps"><li>Toca <b>«Añadir a Google Calendar»</b> y confirma con <b>«Añadir»</b>.</li><li>Aparecerá como un calendario llamado «Hannover 26» y se mantiene al día solo.</li></ol>'+
     '<div class="row"><a class="btn primary" href="'+gcal+'" target="_blank" rel="noopener">'+ICON_CAL_JS+'Añadir a Google Calendar</a></div>'+
     '<p class="caltip">Google Calendar no copia los avisos de un calendario suscrito: puedes activarlos en Ajustes → Hannover 26 → Notificaciones. Otra opción: <a href="'+file+'" download>descargar el archivo .ics</a> y abrirlo desde Descargas.</p>';
