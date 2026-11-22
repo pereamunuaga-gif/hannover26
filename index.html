@@ -1312,10 +1312,10 @@ html[data-skin="corp"] .whop.me .av{background:var(--accent)}
 
 <!-- 09 · CONFIGURACIÓN -->
 <section data-view="ajustes" id="v-ajustes" hidden>
-  <div class="opener"><span class="kick">Nº 09 · Configuración</span><h2>Tu perfil <em>y la organización</em></h2><p class="stand">Quién eres, la estética de la app y, para Rosa Ana y Lars, todo lo que se publica para el grupo.</p></div>
+  <div class="opener"><span class="kick">Nº 09 · Configuración</span><h2>Tu perfil <em>y la organización</em></h2><p class="stand">Quién eres, la estética de la app y, para Rosa Ana, todo lo que se publica para el grupo.</p></div>
   <div class="card" id="ajPerfil"></div>
   <div id="ajOrg" hidden>
-    <div class="orghead"><span class="orgtag">Organización</span><p>Solo para Rosa Ana y Lars. Los botones en rojo cambian lo que ve todo el grupo.</p></div>
+    <div class="orghead"><span class="orgtag">Organización</span><p>Solo para Rosa Ana, que organiza la visita. Los botones en rojo cambian lo que ve todo el grupo.</p></div>
     <div class="card"><div class="eyebrow">1 · Modo organizador</div><div id="cmdBox"></div></div>
     <div id="ajLocked" class="note info" hidden>Activa el modo organizador (paso 1) para editar el aviso, los datos del viaje y la ruta.</div>
     <div id="ajEdit">
@@ -1457,7 +1457,7 @@ const DAYS = {
 };
 const ALL_DATES = Object.keys(DAYS);
 const GROUPS = {
-  G:{members:["Rosa Ana","Lars"],from:"2026-11-25",to:"2026-11-27",co:"Garante",desc:"Garante · Grupo WERTGARANTIE · anfitriones y organización"},
+  G:{members:["Rosa Ana","Lars"],from:"2026-11-25",to:"2026-11-27",co:"Garante",desc:"Garante · Grupo WERTGARANTIE · anfitriones"},
   I:{members:["Raquel","Óscar"],from:"2026-11-25",to:"2026-11-27",co:"Intecat",desc:"Intecat · invitados (salen desde Barcelona)"}
 };
 const PEOPLE = {}; Object.keys(GROUPS).forEach(g=>GROUPS[g].members.forEach(n=>PEOPLE[n]=g));
@@ -1616,7 +1616,7 @@ const TRIP0 = {hotel:"me and all hotel Hannover",hotelAddr:"Aegidientorplatz 3, 
    Sincronización de la ruta (GitHub como almacén)
    ========================================================= */
 const SYNC_CFG = {owner:"pereamunuaga-gif", repo:"hannover26", branch:"main", path:"ruta.json"};
-const COMMANDERS = ["Rosa Ana","Lars"];
+const COMMANDERS = ["Rosa Ana"];   /* solo Rosa Ana organiza; Lars es anfitrión */
 /* Rosa Ana comparte vuelos con los clientes (avisos de coordinación); Lars no tiene vuelos en la app */
 const isRosa=()=>S.person==="Rosa Ana";
 const SOLO={"Lars":1};
@@ -1949,8 +1949,8 @@ function renderInicio(){
   $("#heroTitle").textContent=S.person?(({"Rosa Ana":1,Raquel:1}[S.person]?"Querida ":"Querido ")+S.person+","):"Herzlich willkommen";
   $("#heroLede").textContent=S.person?(grp()==="G"?
       (isRosa()?
-        ("Acompañas a "+other.members.join(" y ")+", de Intecat, en su visita a la casa matriz del Grupo WERTGARANTIE. Os encontráis en Fráncfort y llegáis juntos a Hannover en el LH44. Junto a Lars, completas la organización: en esta edición tienes los vuelos de todos, el programa y el modo organizador para avisar al grupo."):
-        ("Junto a Rosa Ana acompañas a "+other.members.join(" y ")+", de Intecat, en su visita a la casa matriz del Grupo WERTGARANTIE. Aquí tienes los vuelos de Rosa Ana y de los clientes para coordinaros, el programa y el modo organizador para avisar al grupo.")):
+        ("Acompañas a "+other.members.join(" y ")+", de Intecat, en su visita a la casa matriz del Grupo WERTGARANTIE. Os encontráis en Fráncfort y llegáis juntos a Hannover en el LH44. Tú organizas la visita y Lars os acompañará como anfitrión: en esta edición tienes los vuelos de todos, el programa y el modo organizador para avisar al grupo."):
+        ("Junto a Rosa Ana, que organiza la visita, recibes a "+other.members.join(" y ")+", de Intecat, en la casa matriz del Grupo WERTGARANTIE. Aquí tienes los vuelos de Rosa Ana y de los clientes y el programa completo de la visita.")):
       ("Garante, del Grupo WERTGARANTIE, os invita a Hannover, su casa matriz. Viajas con "+companions().join(", ")+"; Rosa Ana y Lars, de Garante, serán vuestros anfitriones. Rosa Ana coincide con vosotros en el vuelo de llegada. Esta pequeña edición reúne vuelos, hotel, programa y todo lo demás.")):
     "Garante invita a Intecat a la ciudad de los Güelfos. Toca tu nombre arriba a la derecha para ver tus vuelos y personalizar la edición.";
   $("#groups").innerHTML=Object.keys(GROUPS).map(k=>{
@@ -2389,7 +2389,7 @@ function renderBookAll(){
   let h=flightsHTML()+'<div class="eyebrow" style="margin-top:6px">Hotel</div>'+bookingHTML()+hotelExtraHTML()+'<div><div class="eyebrow" style="margin-bottom:4px">Citas del programa</div>'+toursHTML()+'</div>';
   if(isCommander()){
     h+='<div class="note info">Para cambiar estos datos o el enlace del grupo de WhatsApp: <button class="btn small" type="button" data-goaj>Configuración</button></div>';
-  } else h+='<p class="lede" style="font-size:.88rem">Si cambia algo, Rosa Ana o Lars lo actualizan aquí y os llega solo.</p>';
+  } else h+='<p class="lede" style="font-size:.88rem">Si cambia algo, Rosa Ana lo actualiza y os llega solo.</p>';
   $("#bookAll").innerHTML=h;
   wireCopy($("#bookAll"));
   $("#bookAll").querySelectorAll("[data-goaj]").forEach(b=>b.onclick=()=>show("ajustes"));
@@ -2484,19 +2484,19 @@ function renderSyncBar(){
     else if(SYNC.state==="publishing") h='<div class="note info">Publicando…</div>';
     else if(SYNC.state==="auth") h='<div class="note bad">GitHub ha rechazado tu clave. Revísala en Configuración → Modo organizador.<div class="row" style="margin-top:8px"><button class="btn small" type="button" data-act="aj">Configuración</button></div></div>';
     else if(S.dirty) h='<div class="note warn"><b>Cambios sin publicar.</b> Los demás siguen viendo la versión anterior.<div class="row" style="margin-top:8px">'+PUB+'</div></div>';
-    else h='<div class="note ok"><b>Modo organizador activo.</b> No hay cambios pendientes.'+esc(last)+'</div>';
+    else h='<div class="note ok"><b>Modo organizador activo.</b> No hay cambios pendientes.'+esc(last)+'<div class="row" style="margin-top:8px">'+PUB+'</div></div>';
   } else if(isCommander()){
     h='<div class="note warn">Formas parte de la organización. Activa el modo organizador en Configuración para editar.<div class="row" style="margin-top:8px"><button class="btn small org" type="button" data-act="aj">Activar modo organizador</button></div></div>';
   } else if(!t){
-    h='<div class="note info">Programa oficial de la visita. Cuando la app esté publicada, aquí veréis también los cambios que publiquen Rosa Ana o Lars.</div>';
+    h='<div class="note info">Programa oficial de la visita. Cuando la app esté publicada, aquí veréis también los cambios que publique Rosa Ana.</div>';
   } else if(SYNC.state==="offline"){
     h='<div class="note warn">Sin conexión: ves la última ruta descargada.'+esc(last)+'</div>';
   } else {
-    h='<div class="note ok"><b>Programa oficial del grupo</b>, lo organizan Rosa Ana y Lars.'+esc(last)+(SYNC.state==="loading"?' Comprobando…':'')+'<div class="row" style="margin-top:6px"><button class="btn small" type="button" data-act="sync">Buscar cambios</button></div></div>';
+    h='<div class="note ok"><b>Programa oficial del grupo</b>, lo organiza Rosa Ana.'+esc(last)+(SYNC.state==="loading"?' Comprobando…':'')+'<div class="row" style="margin-top:6px"><button class="btn small" type="button" data-act="sync">Buscar cambios</button></div></div>';
   }
   hosts.forEach(el=>{ el.innerHTML=h;
     el.querySelectorAll("[data-act]").forEach(b=>b.onclick=()=>{ const a=b.dataset.act;
-      if(a==="pub") publishRoute(false);
+      if(a==="pub"){ if(!S.dirty&&!S.tripDraft&&S.noticeDraft==null){ toast("No hay cambios que publicar"); return; } publishRoute(false); }
       else if(a==="mine"){ SYNC.state="idle"; publishRoute(true); }
       else if(a==="theirs"){ S.official=SYNC.conflict; S.draft=null; delete S.noticeDraft; S.tripDraft=null; S.dirty=false; S._view=null; SYNC.conflict=null; SYNC.state="ok"; save(); render(); toast("Cargada la versión publicada"); }
       else if(a==="aj") show("ajustes");
@@ -2510,7 +2510,7 @@ function renderCmd(){
     '<div class="note '+(S.token?"ok":"info")+'">'+(S.token?'Clave guardada en este móvil. Modo organizador <b>activo</b>.':'Modo organizador <b>inactivo</b>: falta tu clave de GitHub.')+'</div>'+
     '<div class="field"><label for="tokIn">Clave de GitHub (token)</label><input id="tokIn" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="github_pat_…"></div>'+
     '<div class="row"><button class="btn small org" type="button" id="tokSave">Guardar y comprobar</button>'+(S.token?'<button class="btn small" type="button" id="tokDel">Quitar la clave de este móvil</button>':'')+'</div>'+
-    '<p class="lede" style="font-size:.88rem">La clave solo se guarda en este móvil y solo sirve para escribir en el repositorio del viaje. Jorge Perea la crea en GitHub y os la pasa por privado (instrucciones en el README).</p>';
+    '<p class="lede" style="font-size:.88rem">La clave solo se guarda en este móvil y solo sirve para escribir en el repositorio del viaje. Rosa Ana Fernández Ferreira la crea en GitHub y la comparte por privado (instrucciones en el README).</p>';
   $("#tokSave").onclick=async()=>{
     const v=$("#tokIn").value.trim(); if(!v){toast("Pega primero la clave"); return}
     S.token=v; S.draft=null; S.dirty=false; save();
@@ -2770,16 +2770,16 @@ const TUT=[
  {ill:"clover",e:"Paso 1 · Bienvenida",t:"Una app para el viaje",items:[
   ["Esta pequeña edición reúne todo el viaje a Hannover: el programa día a día, el plano, la historia de la ciudad y sus cervecerías, la guía práctica y frases en alemán.",""],
   ["Lo primero es decir quién eres. Tu nombre aparece arriba a la derecha; tócalo si quieres cambiar de persona.",'<span class="btn small green">RA&nbsp; Rosa Ana</span>'],
-  ["Rosa Ana y Lars, de Garante, son los anfitriones y la organización; Raquel y Óscar, de Intecat, los invitados. Del miércoles 25 al viernes 27 de noviembre.",""],
+  ["Rosa Ana y Lars, de Garante, son los anfitriones, y Rosa Ana organiza la visita; Raquel y Óscar, de Intecat, son los invitados. Del miércoles 25 al viernes 27 de noviembre.",""],
   ["«Índice», arriba a la izquierda, abre el sumario. Al final de cada sección, «Siguiente» pasa la página.",'<span class="btn small">☰ Índice</span><span class="btn small">Siguiente →</span>']]},
  {ill:"stall",e:"Paso 2 · Inicio",t:"Tu resumen del viaje",items:[
   ["La portada presenta a los viajeros: Garante como anfitriona e Intecat como invitada. Tu empresa aparece destacada en rojo.",""],
   ["El bloque negro es la cita del viaje: la visita a la sede del Grupo WERTGARANTIE el jueves 26 de 10:30 a 12:00.",B("Cómo llegar")],
   ["«Lo siguiente» te dice qué toca ahora o a continuación, con tus vuelos incluidos. «Hotel y vuelos» resume la reserva y tu asiento.",""],
-  ["Si Rosa Ana o Lars publican un aviso («Nos vemos a las 16:00 bajo el abeto»), aparece arriba del todo, en Inicio y en Plan.",'<span class="pill paid">Aviso de los organizadores</span>'],
+  ["Si Rosa Ana publica un aviso («Nos vemos a las 16:00 bajo el abeto»), aparece arriba del todo, en Inicio y en el Programa.",'<span class="pill paid">Aviso de los organizadores</span>'],
   ["«Enviar mi ubicación al grupo» manda tu posición exacta por WhatsApp con un toque. Útil en el mercadillo.",B("Enviar mi ubicación al grupo","primary")]]},
  {ill:"marktkirche",e:"Paso 3 · Plan",t:"La ruta del grupo",items:[
-  ["La ruta es común para todos y la organizan Rosa Ana y Lars. Cuando publican cambios, os llegan solos en unos minutos.",'<span class="note ok" style="padding:4px 8px"><b>Ruta oficial del grupo</b></span>'],
+  ["La ruta es común para todos y la organiza Rosa Ana. Cuando publica cambios, os llegan solos en unos minutos.",'<span class="note ok" style="padding:4px 8px"><b>Ruta oficial del grupo</b></span>'],
   ["Elige el día en la fila de fechas: miércoles 25, jueves 26 o viernes 27.",'<span class="daychip" aria-pressed="true" style="min-width:56px"><small>Jue</small><b>26</b><em>0 €</em></span>'],
   ["Lo que tiene candado es una cita del programa oficial, con su hora, y no se puede quitar por error. Tus vuelos aparecen el primer y el último día.",LOCK+'<span class="note ok" style="padding:4px 8px"><b>Cita fija ✓</b></span>'],
   ["Organización: añade visitas por zona o por tema (cervecerías, mercadillo), cambia el orden con las flechas y pulsa «Publicar para todos».",B("+ Añadir visita","primary")+UPDN+B("Publicar para todos","primary")],
@@ -2807,7 +2807,7 @@ const TUT=[
   ["Android: abre el enlace en Chrome, toca el menú ⋮ y elige «Añadir a pantalla de inicio» o «Instalar app».",""],
   ["La ruta es la misma para todos. Tus favoritas y tu lista de pendientes se guardan solo en tu móvil.",""],
   ["Una vez abierta, funciona sin cobertura con la última ruta descargada.",""],
-  ["Organización (Rosa Ana y Lars): activad el modo organizador una vez, en Configuración (vuestro círculo con iniciales, arriba a la derecha), pegando cada uno su clave de GitHub.",""],
+  ["Organización (Rosa Ana): activa el modo organizador una vez, en Configuración (tu círculo con iniciales, arriba a la derecha), pegando tu clave de GitHub.",""],
   ["¿Prefieres otra estética? En el Índice (o en «Más») puedes cambiar entre «Revista» y «Corporativa». Se guarda en tu móvil.",""]]}
 ];
 function openTut(i){
@@ -2956,7 +2956,7 @@ function renderChrome(){
   $("#pager").querySelectorAll("[data-pg]").forEach(b=>b.onclick=()=>show(b.dataset.pg));
   if(!$("#colophon").childElementCount){
     $("#colophon").innerHTML='<div class="lgs">'+logoHTML("garante")+'<span class="x">&amp;</span>'+logoHTML("intecat")+'</div>'+
-      '<p>Edición privada para Rosa Ana, Lars, Raquel y Óscar<br>Hannover · 25–27 de noviembre de 2026<br>Programa y vuelos del 17 de noviembre · datos prácticos consultados el 15 de noviembre de 2026</p>';
+      '<p>Edición privada para Rosa Ana, Lars, Raquel y Óscar<br>Elaborada por Rosa Ana Fernández Ferreira · Garante<br>Hannover · 25–27 de noviembre de 2026<br>Programa y vuelos del 17 de noviembre · datos prácticos consultados el 15 de noviembre de 2026</p>';
   }
 }
 
@@ -2965,7 +2965,7 @@ const BG_IMG={"rathaus": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
 /* Dibujo de fondo: cambia con la sección (y con el capítulo en Historia) */
 /* La viñeta de la esquina no repite la lámina que abre cada sección */
 const BG_BY_VIEW={inicio:"rathaus",plan:"altesrathaus",mapa:"rathaus",historia:"ernstaugust",guia:"oper",frases:"kramer",grupo:"leibnizhaus",ajustes:"herrenhausen"};
-/* Láminas: en revista, el dibujo sepia incrustado; en corporativa, la foto (img/foto_*.jpg, aportadas por Jorge) */
+/* Láminas: en revista, el dibujo sepia incrustado; en corporativa, la foto (img/foto_*.jpg, aportadas por la organización) */
 const ART={rathaus:"Neues Rathaus",kramer:"Kramerstraße y Marktkirche",herrenhausen:"Großer Garten de Herrenhausen",ernstaugust:"Ernesto Augusto y la estación",altesrathaus:"Altes Rathaus",oper:"Staatsoper",leibnizhaus:"Leibnizhaus"};
 const ART_BY_ITEM={rathaus:"rathaus",grosser:"herrenhausen",kramer:"kramer",altrathaus:"altesrathaus",leibniz:"leibnizhaus",oper:"oper",hbf:"ernstaugust"};
 /* Historia no lleva lámina de apertura: cada capítulo tiene la suya */
@@ -3329,7 +3329,7 @@ function restHTML(id){
     '<details class="restmore"><summary>Historia, curiosidades y personajes</summary><p>'+esc(r.story)+'</p><ul class="bfacts">'+r.facts.map(f=>'<li><b>'+esc(f[0])+'</b>'+esc(f[1])+'</li>').join("")+'</ul><p class="drink">'+r.drink+'</p></details></div>';
 }
 
-/* Configuración: perfil, estética y (para Rosa Ana y Lars) todo lo que se publica */
+/* Configuración: perfil, estética y (para Rosa Ana) todo lo que se publica */
 function renderAjustes(){
   const cmd=isCommander(), ed=canEdit(), g=S.person?GROUPS[PEOPLE[S.person]]:null;
   $("#ajPerfil").innerHTML='<div class="eyebrow">Tu perfil</div><div class="profile"><span class="av">'+esc(initials(S.person))+'</span><div><b>'+esc(S.person||"Sin elegir")+'</b><span>'+esc(g?g.desc:"Elige quién eres para ver tus vuelos y tu programa.")+'</span></div></div>'+
@@ -3342,7 +3342,8 @@ function renderAjustes(){
   const t=trip();
   $("#ajTrip").innerHTML=TRIP_FIELDS.map(f=>'<div class="field"><label for="tf-'+f[0]+'">'+esc(f[1])+'</label><input id="tf-'+f[0]+'" data-tf="'+f[0]+'" type="'+(f[0]==="wa"?"url":"text")+'" value="'+esc(t[f[0]]||"")+'" placeholder="'+esc(f[2])+'"></div>').join("")+
     '<p class="lede" style="font-size:.85rem">El enlace del grupo se copia en WhatsApp: nombre del grupo → Invitar mediante enlace → Copiar enlace.</p>';
-  $("#ajTrip").querySelectorAll("[data-tf]").forEach(i=>i.addEventListener("input",()=>{ if(!canEdit()) return; if(!S.tripDraft) S.tripDraft=trip(); S.tripDraft[i.dataset.tf]=i.value.trim(); S.dirty=true; save(); renderSyncBar(); }));
+  $("#ajTrip").querySelectorAll("[data-tf]").forEach(i=>{ const upd=()=>{ if(!canEdit()) return; const v=i.value.trim(); if(!S.tripDraft) S.tripDraft=trip(); if((S.tripDraft[i.dataset.tf]||"")===v&&S.dirty) return; S.tripDraft[i.dataset.tf]=v; S.dirty=true; save(); renderSyncBar(); };
+    ["input","change","blur"].forEach(ev=>i.addEventListener(ev,upd)); i.addEventListener("paste",()=>setTimeout(upd,50)); });
   $("#ajGoPlan").onclick=()=>show("plan");
   renderSyncBar();
 }
@@ -3368,7 +3369,7 @@ function renderGrpExtra(){
     '<button type="button" class="sharebtn" id="grpHotel"><span class="e">🛏️</span><span>Llévame al hotel</span></button>';
   $("#grpLoc").onclick=()=>$("#locBtn").click();
   $("#grpHotel").onclick=openHotel;
-  $("#grpWho").innerHTML=Object.keys(GROUPS).map(k=>{ const g=GROUPS[k]; return '<div class="whorow"><small>'+(k==="G"?"Anfitriones y organización · Garante":"Invitados · Intecat")+'</small><div>'+g.members.map(m=>'<span class="whop'+(m===S.person?" me":"")+'"><span class="av">'+esc(initials(m))+'</span>'+esc(m)+(m===S.person?' <i>(tú)</i>':'')+'</span>').join("")+'</div></div>'; }).join("");
+  $("#grpWho").innerHTML=Object.keys(GROUPS).map(k=>{ const g=GROUPS[k]; return '<div class="whorow"><small>'+(k==="G"?"Anfitriones · Garante":"Invitados · Intecat")+'</small><div>'+g.members.map(m=>'<span class="whop'+(m===S.person?" me":"")+'"><span class="av">'+esc(initials(m))+'</span>'+esc(m)+(COMMANDERS.indexOf(m)>=0?' <i>· organiza</i>':'')+(m===S.person?' <i>(tú)</i>':'')+'</span>').join("")+'</div></div>'; }).join("");
 }
 
 /* Arranque */
