@@ -877,6 +877,18 @@ html[data-skin="corp"] .hc-x{border-color:var(--line);color:var(--navy);letter-s
 html[data-skin="corp"] .hc-name{font-weight:700;color:var(--navy);font-size:clamp(2rem,9vw,3rem)}
 html[data-skin="corp"] .hc-addr{color:var(--navy)}
 html[data-skin="corp"] .hc-sos a{border-radius:10px}
+
+.calsteps{margin:4px 0 12px;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:.95rem;color:var(--ink2)}
+.caltip{font-size:.85rem;color:var(--muted);margin-top:12px}
+.caltip a{color:var(--accent)}
+.calsheet .sheet-b{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 24px)}
+
+.hc-de{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.hc-say{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;vertical-align:middle;flex:none}
+.hc-say svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.hc-say.sm{width:32px;height:32px;margin:0 2px}
+.hc-say.sm svg{width:17px;height:17px}
+.hc-say:active{background:var(--accent);color:#fff}
 </style>
 </head>
 <body>
@@ -1369,7 +1381,7 @@ const DAYS = {
 const ALL_DATES = Object.keys(DAYS);
 const GROUPS = {
   G:{members:["Rosa Ana","Lars"],from:"2026-11-25",to:"2026-11-27",co:"Garante",desc:"Garante · Grupo WERTGARANTIE · anfitriones y organización"},
-  I:{members:["Óscar","Raquel"],from:"2026-11-25",to:"2026-11-27",co:"Intecat",desc:"Intecat · invitados (salen desde Barcelona)"}
+  I:{members:["Raquel","Óscar"],from:"2026-11-25",to:"2026-11-27",co:"Intecat",desc:"Intecat · invitados (salen desde Barcelona)"}
 };
 const PEOPLE = {}; Object.keys(GROUPS).forEach(g=>GROUPS[g].members.forEach(n=>PEOPLE[n]=g));
 /* Punto de partida del mapa y de las distancias: el hotel (me and all hotel Hannover, Aegidientorplatz 3). */
@@ -1380,7 +1392,7 @@ const T = s => new Date(s+":00+01:00");
 
 /* Vuelos (documentos del 17 de noviembre de 2026). Tramo: [vuelo, salida, llegada, origen, terminal, destino, terminal, detalle] */
 const FLIGHTS = {
-  bcn:{who:["Óscar","Raquel"],from:"Barcelona",leave:"07:30",
+  bcn:{who:["Raquel","Óscar"],from:"Barcelona",leave:"07:30",
     ida:{al:"Lufthansa",title:"Ida · miércoles 25",lay:"Escala en Fráncfort: 1 h 20 min",ci:"Check-in online desde el martes 24 a las 10:55",
       legs:[["LH1125","2026-11-25T09:55","2026-11-25T12:05","BCN","Barcelona T1","FRA","Fráncfort T1","2 h 10 min · A321"],
             ["LH44","2026-11-25T13:25","2026-11-25T14:20","FRA","Fráncfort T1","HAJ","Hannover","55 min · A320"]]},
@@ -1398,7 +1410,7 @@ const FLIGHTS = {
             ["LH1114","2026-11-27T13:40","2026-11-27T16:20","FRA","Fráncfort T1","MAD","Madrid T2","2 h 40 min · A321"]]},
     seats:null}
 };
-const FLGRP = {"Rosa Ana":"mad","Óscar":"bcn","Raquel":"bcn"};
+const FLGRP = {"Rosa Ana":"mad","Raquel":"bcn","Óscar":"bcn"};
 
 const ZONES = [
   {id:"alt",n:"Casco antiguo"},{id:"mitte",n:"Centro y Kröpcke"},{id:"aegi",n:"Rathaus y Aegi"},
@@ -1420,7 +1432,7 @@ const ITEMS = [
    tip:"Vestíbulo del me and all hotel Hannover, Aegidientorplatz 3.",q:"me and all hotel Hannover, Aegidientorplatz 3"},
   {id:"wg",z:"aegi",ll:[52.3701,9.7404],n:"Visita a la sede central del Grupo WERTGARANTIE",c:0,pp:"Invitación",dur:"1 h 30 min",meeting:true,
    fixed:{d:"2026-11-26",h:"10:30",e:"12:00",t:"10:30–12:00 · visita a las instalaciones y encuentro con el equipo"},
-   tip:"Breite Straße 8, a unos minutos a pie del hotel. La casa matriz de Garante: Rosa Ana y Lars reciben a Óscar y Raquel. Visita a las instalaciones y encuentro con el equipo.",q:"WERTGARANTIE Breite Straße 8, 30159 Hannover"},
+   tip:"Breite Straße 8, a unos minutos a pie del hotel. La casa matriz de Garante: Rosa Ana y Lars reciben a Raquel y Óscar. Visita a las instalaciones y encuentro con el equipo.",q:"WERTGARANTIE Breite Straße 8, 30159 Hannover"},
   {id:"xmas",z:"alt",ll:[52.3721,9.7343],n:"Visita al mercado de Navidad",c:0,dur:"3 h",special:"xmas",market:true,
    fixed:{d:"2026-11-26",h:"18:00",e:"19:45",t:"18:00–19:45 · mercado tradicional, mercado histórico, pueblo navideño finlandés y degustación de Glühwein y especialidades locales"},
    tip:"De la Marktkirche al Leine y al Ballhof: más de 150 puestos, el abeto gigante de 19 m con 3.000 luces y espectáculos de fuego a las 18:00 y a las 20:00. Media hora antes del cierre, el sereno toca la campana. Probad el Glühwein (vino caliente) y la Bratwurst.",q:"Weihnachtsmarkt Marktkirche Hannover"},
@@ -1569,8 +1581,7 @@ const CHECKS = [
   ["cash","Algo de efectivo","Para los puestos del mercado de Navidad."],
   ["coat","Ropa de abrigo","Gorro, guantes, bufanda y calzado que no cale."],
   ["shoes","Calzado cómodo","El jueves se camina: jardines, centro histórico y mercado."],
-  ["app","La app en la pantalla de inicio","Abridla una vez con cobertura para tenerla sin conexión."],
-  ["gift","Detalle para los anfitriones","Opcional: algo típico de Cataluña o de España."]
+  ["app","La app en la pantalla de inicio","Abridla una vez con cobertura para tenerla sin conexión."]
 ];
 
 const TRANSPORT = [
@@ -1947,11 +1958,11 @@ function flightStop(dir){
     return '<div class="tip">'+(multi?'<b>'+(dir==="ida"?"Desde ":"Hacia ")+esc(f.from)+':</b> ':'')+b.legs.map(l=>esc(l[0]+" · "+l[4]+" "+hm(l[1])+" → "+l[6]+" "+hm(l[2]))).join(" · ")+'</div>'; }).join("");
   const btn='<div class="links"><button class="btn small" type="button" data-goflights>Vuelos y asientos</button></div>';
   if(dir==="ida") return '<li class="stop fixed"><span class="n">✈</span><div class="hh num">14:20 · llegada</div><div class="t"><h3>Llegada a Hannover</h3></div>'+body+
-    '<div class="tip">'+(isSolo()?'Rosa Ana, Óscar y Raquel llegan juntos en el LH44 desde Fráncfort.':'Todos llegáis juntos en el LH44 desde Fráncfort.')+(isRosa()?' Óscar y Raquel van en los asientos 14D y 14E.':'')+' Al hotel: en taxi (20–25 min) o en S5 hasta la estación central y de allí metro o taxi hasta Aegidientorplatz. Check-in desde las 15:00 y tarde libre para descansar.</div>'+btn+'</li>';
+    '<div class="tip">'+(isSolo()?'Rosa Ana, Raquel y Óscar llegan juntos en el LH44 desde Fráncfort.':'Todos llegáis juntos en el LH44 desde Fráncfort.')+(isRosa()?' Raquel y Óscar van en los asientos 14D y 14E.':'')+' Al hotel: en taxi (20–25 min) o en S5 hasta la estación central y de allí metro o taxi hasta Aegidientorplatz. Check-in desde las 15:00 y tarde libre para descansar.</div>'+btn+'</li>';
   const lv=gs.map(g=>FLIGHTS[g].leave+(multi?" ("+FLIGHTS[g].from+")":"")).join(" · ");
   const soloNote=isSolo()?'<div class="tip">Horarios de salida de Rosa Ana y de los clientes.</div>':'';
   return '<li class="stop fixed"><span class="n">✈</span><div class="hh num">'+esc(lv)+' · al aeropuerto</div><div class="t"><h3>Salida hacia el aeropuerto</h3></div>'+soloNote+body+
-    '<div class="tip">Taxi del hotel al aeropuerto: unos 20–25 minutos. Estad allí al menos 1 h 30 min antes de la salida.'+(isRosa()?' Puedes compartir el taxi con Óscar y Raquel ajustándolo a su vuelo (salida hacia las 07:30).':'')+'</div>'+btn+'</li>';
+    '<div class="tip">Taxi del hotel al aeropuerto: unos 20–25 minutos. Estad allí al menos 1 h 30 min antes de la salida.'+(isRosa()?' Puedes compartir el taxi con Raquel y Óscar ajustándolo a su vuelo (salida hacia las 07:30).':'')+'</div>'+btn+'</li>';
 }
 function renderLive(){
   const el=$("#liveCard"); if(!el) return;
@@ -2254,7 +2265,7 @@ function hotelExtraHTML(){
 }
 function seatLine(g,dir,i){
   const f=FLIGHTS[g];
-  if(!f.seats) return '<div class="seat">'+(isRosa()?'Asiento sin asignar: elígelo en el check-in online':'Asiento sin asignar: se elige en el check-in online')+(dir==="ida"&&i===1?' (Óscar y Raquel van en la fila 14).':'.')+'</div>';
+  if(!f.seats) return '<div class="seat">'+(isRosa()?'Asiento sin asignar: elígelo en el check-in online':'Asiento sin asignar: se elige en el check-in online')+(dir==="ida"&&i===1?' (Raquel y Óscar van en la fila 14).':'.')+'</div>';
   if(f.seats[S.person]) return '<div class="seat">Tu asiento: <b>'+f.seats[S.person][dir][i]+'</b></div>';
   return '<div class="seat">Asientos: '+Object.keys(f.seats).map(n=>'<b>'+f.seats[n][dir][i]+'</b> '+esc(n)).join(" · ")+'</div>';
 }
@@ -2281,7 +2292,7 @@ function flightsHTML(){
     });
   });
   if(isSolo()) h+='<div class="note info">Estos son los vuelos de Rosa Ana y de los clientes, para coordinaros.</div>';
-  if(isRosa()) h+='<div class="note warn"><b>Coordinación (solo organización).</b> A la ida coincides con Óscar y Raquel en el LH44 (fila 14): llegáis juntos a las 14:20 y podéis hacer juntos el traslado. A la vuelta los horarios no coinciden: se puede compartir el taxi ajustándolo a su vuelo (LX815, salida del hotel hacia las 07:30).</div>';
+  if(isRosa()) h+='<div class="note warn"><b>Coordinación (solo organización).</b> A la ida coincides con Raquel y Óscar en el LH44 (fila 14): llegáis juntos a las 14:20 y podéis hacer juntos el traslado. A la vuelta los horarios no coinciden: se puede compartir el taxi ajustándolo a su vuelo (LX815, salida del hotel hacia las 07:30).</div>';
   h+='<div class="note info">Equipaje por persona: 1 objeto personal, 1 maleta de cabina de hasta 8 kg y 1 facturada de hasta 23 kg. Todas las horas son locales: Alemania y Suiza tienen la misma hora que la España peninsular. Los modelos de avión y las terminales pueden cambiar; revisad la tarjeta de embarque.</div>';
   return h;
 }
@@ -2564,10 +2575,18 @@ const PHRASES=[
  ["local","Kein Trinkwasser","Agua no potable (en grifos y fuentes)","kain trínk-vaser"]
 ];
 let phrCat="all";
+/* La mejor voz alemana del móvil: de Alemania (de-DE), y si las hay, las de mayor calidad */
+function deVoice(){
+  const vs=(window.speechSynthesis&&speechSynthesis.getVoices())||[];
+  const de=vs.filter(x=>/^de([-_]|$)/i.test(x.lang)); if(!de.length) return null;
+  const score=x=>(/^de[-_]DE/i.test(x.lang)?10:0)+(/premium|enhanced|neural|natural|wavenet/i.test(x.name)?6:0)+(/google/i.test(x.name)?3:0)+(/^(anna|helena|petra|markus|yannick|viktor)/i.test(x.name)?2:0)+(x.localService?1:0);
+  return de.sort((a,b)=>score(b)-score(a))[0];
+}
+try{ if(window.speechSynthesis){ speechSynthesis.getVoices(); speechSynthesis.addEventListener&&speechSynthesis.addEventListener("voiceschanged",()=>{}); } }catch(e){}
 function speak(t){
   try{const s=window.speechSynthesis; if(!s) return toast("Tu navegador no puede leer en voz alta"); s.cancel();
     const u=new SpeechSynthesisUtterance(t.replace(/\s*\/\s*/g,". ").replace(/…/g,"")); u.lang="de-DE"; u.rate=.85;
-    const v=(s.getVoices()||[]).find(x=>/^de/i.test(x.lang)); if(v) u.voice=v; s.speak(u);}catch(e){toast("Tu navegador no puede leer en voz alta")}
+    const v=deVoice(); if(v) u.voice=v; s.speak(u);}catch(e){toast("Tu navegador no puede leer en voz alta")}
 }
 function showBig(p){
   const el=document.createElement("div"); el.className="showcard"; el.setAttribute("role","dialog");
@@ -2646,7 +2665,7 @@ const TUT=[
  {ill:"clover",e:"Paso 1 · Bienvenida",t:"Una app para el viaje",items:[
   ["Esta pequeña edición reúne todo el viaje a Hannover: el programa día a día, el plano, la historia de la ciudad y sus cervecerías, la guía práctica y frases en alemán.",""],
   ["Lo primero es decir quién eres. Tu nombre aparece arriba a la derecha; tócalo si quieres cambiar de persona.",'<span class="btn small green">RA&nbsp; Rosa Ana</span>'],
-  ["Rosa Ana y Lars, de Garante, son los anfitriones y la organización; Óscar y Raquel, de Intecat, los invitados. Del miércoles 25 al viernes 27 de noviembre.",""],
+  ["Rosa Ana y Lars, de Garante, son los anfitriones y la organización; Raquel y Óscar, de Intecat, los invitados. Del miércoles 25 al viernes 27 de noviembre.",""],
   ["«Índice», arriba a la izquierda, abre el sumario. Al final de cada sección, «Siguiente» pasa la página.",'<span class="btn small">☰ Índice</span><span class="btn small">Siguiente →</span>']]},
  {ill:"stall",e:"Paso 2 · Inicio",t:"Tu resumen del viaje",items:[
   ["La portada presenta a los viajeros: Garante como anfitriona e Intecat como invitada. Tu empresa aparece destacada en rojo.",""],
@@ -2816,7 +2835,7 @@ function renderChrome(){
   $("#pager").querySelectorAll("[data-pg]").forEach(b=>b.onclick=()=>show(b.dataset.pg));
   if(!$("#colophon").childElementCount){
     $("#colophon").innerHTML='<div class="lgs">'+logoHTML("garante")+'<span class="x">&amp;</span>'+logoHTML("intecat")+'</div>'+
-      '<p>Edición privada para Rosa Ana, Lars, Óscar y Raquel<br>Hannover · 25–27 de noviembre de 2026<br>Programa y vuelos del 17 de noviembre · datos prácticos consultados el 15 de noviembre de 2026</p>';
+      '<p>Edición privada para Rosa Ana, Lars, Raquel y Óscar<br>Hannover · 25–27 de noviembre de 2026<br>Programa y vuelos del 17 de noviembre · datos prácticos consultados el 15 de noviembre de 2026</p>';
   }
 }
 
@@ -3025,12 +3044,30 @@ function buildICS(){
   L.push("END:VCALENDAR");
   return L.map(icsFold).join("\r\n")+"\r\n";
 }
+/* Los calendarios se publican como archivos (cal/*.ics): iOS y Android no abren de forma fiable los generados al vuelo.
+   Si los organizadores cambian el programa, hay que regenerarlos (ver CLAUDE.md). */
+const CAL_DATE="22 de noviembre";
+function calProfile(){ const g=FLGRP[S.person]; return g==="bcn"?"barcelona":g==="mad"?"madrid":"grupo"; }
 function addToCalendar(){
-  const ics=buildICS(), name="Hannover26"+(S.person?"-"+S.person.normalize("NFD").replace(/[^\w]/g,""):"")+".ics";
-  const iOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
-  if(iOS){ location.href="data:text/calendar;charset=utf-8,"+encodeURIComponent(ics); }
-  else{ const url=URL.createObjectURL(new Blob([ics],{type:"text/calendar;charset=utf-8"})); const a=document.createElement("a"); a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),60000); }
-  toast("Elige «Añadir todo» en el calendario");
+  const file="cal/hannover26-"+calProfile()+".ics";
+  const abs=new URL(file,location.href).href, webcal=abs.replace(/^https?:/,"webcal:");
+  const ua=navigator.userAgent, iOS=/iP(hone|ad|od)/.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1), android=/Android/i.test(ua);
+  const gcal="https://calendar.google.com/calendar/render?cid="+encodeURIComponent(webcal);
+  const who=calProfile()==="grupo"?"el programa y los vuelos de todos":"el programa y tus vuelos";
+  let body;
+  if(iOS) body='<ol class="calsteps"><li>Toca <b>«Abrir en Calendario»</b>. Se abrirá una página con la lista de citas.</li><li>Pulsa <b>«Añadir todo»</b> y elige el calendario (por ejemplo, «Casa» o «Trabajo»).</li></ol>'+
+    '<div class="row"><a class="btn primary" href="'+file+'" target="_blank" rel="noopener">'+ICON_CAL_JS+'Abrir en Calendario</a></div>'+
+    '<p class="caltip">¿No aparece «Añadir todo»? Usa <a href="'+webcal+'">Suscribirse al calendario</a>: se abre la app Calendario y se mantiene al día sola. En ese caso, desactiva «Eliminar alertas» para conservar los avisos.</p>';
+  else if(android) body='<ol class="calsteps"><li>Toca <b>«Añadir a Google Calendar»</b> y confirma con <b>«Añadir»</b>.</li><li>Aparecerá como un calendario llamado «Hannover 26» y se mantiene al día solo.</li></ol>'+
+    '<div class="row"><a class="btn primary" href="'+gcal+'" target="_blank" rel="noopener">'+ICON_CAL_JS+'Añadir a Google Calendar</a></div>'+
+    '<p class="caltip">Google Calendar no copia los avisos de un calendario suscrito: puedes activarlos en Ajustes → Hannover 26 → Notificaciones. Otra opción: <a href="'+file+'" download>descargar el archivo .ics</a> y abrirlo desde Descargas.</p>';
+  else body='<div class="row"><a class="btn primary" href="'+file+'" download>'+ICON_CAL_JS+'Descargar el archivo .ics</a><a class="btn" href="'+gcal+'" target="_blank" rel="noopener">Google Calendar</a></div>'+
+    '<p class="caltip">Ábrelo con Outlook, Calendario de Apple o el que uses: añadirá todas las citas con sus avisos.</p>';
+  $("#sheetHost").innerHTML='<div class="sheet-bg" id="sbg"></div><div class="sheet calsheet" role="dialog" aria-modal="true" aria-labelledby="shT">'+
+    '<div class="sheet-h"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><div><div class="eyebrow">Calendario</div><h2 id="shT">Añadir al calendario</h2></div><button class="icon" id="shX" type="button" aria-label="Cerrar"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div></div>'+
+    '<div class="sheet-b"><p class="lede" style="font-size:.95rem">Incluye '+who+', con aviso 15 minutos antes de cada cita. Programa oficial a '+CAL_DATE+'; si los organizadores lo cambian, os avisarán en la app.</p>'+body+'</div></div>';
+  const close=()=>{$("#sheetHost").innerHTML=""};
+  $("#sbg").onclick=close; $("#shX").onclick=close;
 }
 
 /* ---------- 3. El tiempo de los tres días y qué ponerse (Open-Meteo, sin clave ni datos personales) ---------- */
@@ -3121,16 +3158,19 @@ function openHotel(){
   const q=encodeURIComponent(name+", "+addr);
   const el=document.createElement("div"); el.className="hotelcard"; el.setAttribute("role","dialog"); el.setAttribute("aria-modal","true"); el.setAttribute("aria-label","Llévame al hotel");
   el.innerHTML='<div class="hc-in"><div class="hc-top"><span>Llévame al hotel</span><button type="button" class="hc-x" aria-label="Cerrar">Cerrar</button></div>'+
-    '<div class="hc-show"><div class="hc-de">Bitte bringen Sie mich zu diesem Hotel:</div><div class="hc-name">'+esc(name)+'</div><div class="hc-addr">'+esc(addr).replace(/, /,"<br>")+'</div><div class="hc-es">«Por favor, lléveme a este hotel». Enseña esta pantalla al taxista.</div></div>'+
+    '<div class="hc-show"><div class="hc-de"><span>Bitte bringen Sie mich zu diesem Hotel:</span><button type="button" class="hc-say" data-say="hotel" aria-label="Escuchar en alemán"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg></button></div><div class="hc-name">'+esc(name)+'</div><div class="hc-addr">'+esc(addr).replace(/, /,"<br>")+'</div><div class="hc-es">«Por favor, lléveme a este hotel». Enseña esta pantalla al taxista.</div></div>'+
     '<div class="hc-dist" id="hcDist"></div>'+
     '<div class="hc-acts"><a class="btn primary" href="https://www.google.com/maps/dir/?api=1&destination='+q+'&travelmode=walking" target="_blank" rel="noopener">Ir a pie</a>'+
     '<a class="btn" href="https://www.google.com/maps/dir/?api=1&destination='+q+'&travelmode=transit" target="_blank" rel="noopener">En transporte</a>'+
     '<a class="btn" href="tel:+495119368730">Llamar al hotel</a></div>'+
-    '<p class="hc-tip"><b>¿Necesitas un taxi?</b> En el restaurante o en el hotel: «Können Sie mir bitte ein Taxi rufen?» <i>(¿Puede pedirme un taxi?)</i>.</p>'+
+    '<p class="hc-tip"><b>¿Necesitas un taxi?</b> En el restaurante o en el hotel: «Können Sie mir bitte ein Taxi rufen?» <button type="button" class="hc-say sm" data-say="taxi" aria-label="Escuchar en alemán"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg></button> <i>(¿Puede pedirme un taxi?)</i>.</p>'+
     '<div class="hc-sos"><a href="tel:112"><b>112</b>Emergencias</a><a href="tel:110"><b>110</b>Policía</a><a href="tel:116117"><b>116 117</b>Médico de guardia</a></div></div>';
   const close=()=>{ el.remove(); document.removeEventListener("keydown",onKey); };
   const onKey=e=>{ if(e.key==="Escape") close(); };
   el.querySelector(".hc-x").onclick=close; document.addEventListener("keydown",onKey);
+  const street=addr.split(",")[0];
+  const SAY={hotel:"Bitte bringen Sie mich zu diesem Hotel: "+name+", "+street+".",taxi:"Können Sie mir bitte ein Taxi rufen?"};
+  el.querySelectorAll("[data-say]").forEach(b=>b.onclick=()=>speak(SAY[b.dataset.say]));
   document.body.appendChild(el); el.querySelector(".hc-x").focus();
   const showDist=ll=>{ const w=walkInfo(ll,HOTEL), d=$("#hcDist"); if(d) d.textContent=w.d<.06?"Ya estás en el hotel.":"Estás a "+w.ds+" del hotel · "+(w.min>40?"mejor en taxi o en transporte":"unos "+w.min+" min a pie")+"."; };
   if(GEO) showDist(GEO.ll);
