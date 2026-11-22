@@ -1270,7 +1270,7 @@ html[data-skin="corp"] .whop.me .av{background:var(--accent)}
   <article class="gblock">
     <div class="k">En un toque</div>
     <h3>Compartir <em>con el grupo</em></h3>
-    <p class="lede" style="font-size:.95rem">Cada botón abre WhatsApp con el mensaje ya escrito: elige el grupo del viaje y envía.</p>
+    <p class="lede" style="font-size:.95rem">Cada botón prepara el mensaje y abre el grupo del viaje: pega y envía.</p>
     <div class="sharegrid" id="grpShare"></div>
   </article>
 
@@ -1907,6 +1907,7 @@ function render(){
   $("#whoLabel").textContent=S.person||"¿Quién eres?";
   $("#whoAv").textContent=initials(S.person);
   const wa=trip().wa; const g2=$("#waGroup2"); if(g2) g2.href=wa||"https://wa.me/";
+  const g1=$("#waGroup"); if(g1){ if(wa){ g1.href=wa; g1.target="_blank"; g1.rel="noopener"; g1.setAttribute("aria-label","Abrir el grupo de WhatsApp del viaje"); } else { g1.href="#grupo"; g1.removeAttribute("target"); g1.setAttribute("aria-label","El grupo: escribir y votar"); } }
   if(S.tab==="inicio") renderInicio();
   if(S.tab==="plan") renderPlan();
   if(S.tab==="mapa") renderMapView();
@@ -3029,7 +3030,7 @@ function phraseMsg(p){ return "🇩🇪 «"+p[1]+"»\n["+p[3]+"]\n"+p[2]; }
 function renderGrupo(){
   const wa=trip().wa;
   $("#grpLink").innerHTML=wa?
-    '<div class="row" style="justify-content:space-between"><div><div class="eyebrow">Grupo del viaje</div><b style="font-family:var(--f-display);font-size:1.4rem">Abrir el chat del viaje</b></div><a class="btn green small" href="'+esc(wa)+'" target="_blank" rel="noopener">Abrir grupo</a></div>':
+    '<div class="row" style="justify-content:space-between"><div><div class="eyebrow">Grupo del viaje</div><b style="font-family:var(--f-display);font-size:1.4rem">Abrir el chat del viaje</b></div><a class="btn green small" href="'+esc(wa)+'" target="_blank" rel="noopener">Abrir grupo</a></div><p class="lede" style="font-size:.88rem;margin-top:8px">Al enviar algo desde la app, el mensaje se copia y se abre el grupo: mantén pulsado el campo de escribir, elige «Pegar» y envía.</p>':
     '<div class="eyebrow">Grupo del viaje</div><p class="lede" style="font-size:.95rem">Cuando el enlace de invitación del grupo esté guardado en <b>Configuración</b> (modo organizador), aquí tendréis el acceso directo al chat.</p>';
   if(!grpBuilt){
     $("#quick").innerHTML=QUICK.map((q,i)=>'<button type="button" class="chip" data-q="'+i+'">'+esc(q)+'</button>').join("")+'<button type="button" class="chip" data-q="de">🇩🇪 Frase al azar</button>';
@@ -3371,6 +3372,27 @@ function renderGrpExtra(){
   $("#grpHotel").onclick=openHotel;
   $("#grpWho").innerHTML=Object.keys(GROUPS).map(k=>{ const g=GROUPS[k]; return '<div class="whorow"><small>'+(k==="G"?"Anfitriones · Garante":"Invitados · Intecat")+'</small><div>'+g.members.map(m=>'<span class="whop'+(m===S.person?" me":"")+'"><span class="av">'+esc(initials(m))+'</span>'+esc(m)+(COMMANDERS.indexOf(m)>=0?' <i>· organiza</i>':'')+(m===S.person?' <i>(tú)</i>':'')+'</span>').join("")+'</div></div>'; }).join("");
 }
+
+/* Enviar al grupo: WhatsApp no deja que una web escriba directamente en un grupo.
+   Si el enlace del grupo está publicado, se copia el texto y se abre el propio grupo: solo queda pegar y enviar. */
+function copyText(t){
+  let ok=false;
+  try{ const ta=document.createElement("textarea"); ta.value=t; ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.top="0"; ta.style.opacity="0"; document.body.appendChild(ta);
+    ta.focus(); ta.select(); ta.setSelectionRange(0,t.length); ok=document.execCommand("copy"); ta.remove(); }catch(e){}
+  try{ if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).catch(()=>{}); ok=ok||!!navigator.clipboard; } }catch(e){}
+  return ok;
+}
+document.addEventListener("click",e=>{
+  if(e.defaultPrevented) return;
+  const a=e.target&&e.target.closest&&e.target.closest('a[href^="https://wa.me/?text="]'); if(!a) return;
+  const wa=trip().wa; if(!wa||!/^https:\/\/chat\.whatsapp\.com\//.test(wa)) return;   /* sin enlace del grupo: WhatsApp pide elegir el chat */
+  let t=""; try{ t=decodeURIComponent(a.getAttribute("href").split("text=")[1]||""); }catch(err){}
+  if(!t.trim()) return;
+  if(!copyText(t)) return;   /* si no se pudo copiar, se usa el envío normal */
+  e.preventDefault();
+  const g=document.createElement("a"); g.href=wa; g.target="_blank"; g.rel="noopener"; document.body.appendChild(g); g.click(); g.remove();
+  setTimeout(()=>toast("Mensaje copiado: en el grupo, mantén pulsado y elige «Pegar»"),50);
+});
 
 /* Arranque */
 applySkin();
