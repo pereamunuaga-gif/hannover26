@@ -889,6 +889,22 @@ html[data-skin="corp"] .hc-sos a{border-radius:10px}
 .hc-say.sm{width:32px;height:32px;margin:0 2px}
 .hc-say.sm svg{width:17px;height:17px}
 .hc-say:active{background:var(--accent);color:#fff}
+
+.restlore{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.restlore .beerph{--ph:min(46vw,200px);margin:2px 0 0}
+.restlore .beerph figcaption::before{content:"Fotografía · "}
+.restmore{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:2px 0}
+.restmore summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;font-family:var(--f-label);font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.restmore summary::-webkit-details-marker{display:none}
+.restmore summary::after{content:"+";font-family:var(--f-display);font-size:1.4rem;line-height:1;letter-spacing:0}
+.restmore[open] summary::after{content:"−"}
+.restmore p{color:var(--ink2);margin:4px 0 10px}
+.restmore .bfacts{margin-bottom:10px}
+.restmore .drink{font-style:italic}
+.restmore .drink b{font-style:normal;color:var(--accent);font-weight:500}
+html[data-skin="corp"] .restlore .beerph{--ph:170px}
+html[data-skin="corp"] .restmore summary{text-transform:none;letter-spacing:0;font-size:.85rem;font-weight:700}
+html[data-skin="corp"] .restmore .drink{font-style:normal}
 </style>
 </head>
 <body>
@@ -1503,7 +1519,7 @@ const ITEMS = [
   /* Programa oficial (documento de Garante) */
   {id:"stav",z:"aegi",ll:[52.3682,9.7414],n:"Almuerzo en Ständige Vertretung",c:0,pp:"Invitación",dur:"1 h 15 min",
    fixed:{d:"2026-11-26",h:"14:00",e:"15:15",t:"14:00–15:15 · almuerzo conjunto en un restaurante del centro"},
-   tip:"Friedrichswall 10, en la Aegidientorplatz, junto al hotel. Su nombre recuerda a las «representaciones permanentes» que las dos Alemanias tuvieron en lugar de embajadas, y sus paredes están llenas de fotos de políticos.",q:"Ständige Vertretung, Friedrichswall 10, 30159 Hannover"},
+   tip:"Friedrichswall 10, en la Aegidientorplatz, junto al hotel. Su nombre recuerda a las «representaciones permanentes» que las dos Alemanias tuvieron en lugar de embajadas: es la sucursal de una cervecería renana de culto entre los políticos.",q:"Ständige Vertretung, Friedrichswall 10, 30159 Hannover"},
   {id:"traslado",z:"herr",n:"Traslado a Herrenhausen",c:0,pp:"Taxi",dur:"20 min",
    fixed:{d:"2026-11-26",h:"12:00",e:"12:20",t:"12:00–12:20 · en taxi a los jardines reales"},
    tip:"Desplazamiento en taxi desde la sede central hasta los Jardines Reales de Herrenhausen.",q:"Großer Garten Herrenhausen"},
@@ -1938,7 +1954,7 @@ function renderPlan(){
       (leg?'<div class="walk">'+legFrom+': '+leg+'</div>':'')+
       '<div class="meta">'+costPill(it)+'<span class="pill">'+esc(ZN[it.z].n)+'</span><span class="pill">'+esc(it.dur)+'</span>'+(it.book&&!/agotado/i.test(it.book)?'<span class="pill book">'+esc(it.book)+'</span>':'')+'</div>'+
       w.map(x=>'<div class="note '+x[0]+'">'+esc(x[1])+'</div>').join("")+
-      '<div class="tip">'+esc(it.tip)+'</div>'+(ART_BY_ITEM[id]?plateHTML(ART_BY_ITEM[id],"thumb"):"")+
+      '<div class="tip">'+esc(it.tip)+'</div>'+(ART_BY_ITEM[id]?plateHTML(ART_BY_ITEM[id],"thumb"):"")+restHTML(id)+
       '<div class="links">'+(it.ll?'<button class="btn small green" type="button" data-map="'+id+'"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Ver en el mapa</button>':'')+
       '<a class="btn small" href="'+gmaps(it.q)+'" target="_blank" rel="noopener">Cómo llegar</a>'+
       '<a class="btn small wa" href="'+waLink(stopText(cur,i,it,leg,legFrom))+'" target="_blank" rel="noopener" aria-label="Enviar '+esc(it.n)+' al grupo de WhatsApp"><svg viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/></svg>Al grupo</a></div></li>';
@@ -2664,7 +2680,7 @@ function renderHistoria(){
   document.querySelectorAll("#v-historia [data-ill]").forEach(s=>{ if(!s.firstChild) s.innerHTML=ill(s.dataset.ill) });
   if(!histBuilt){
     $("#histNav").innerHTML=HNAV.map(n=>'<button type="button" class="chip" data-go="'+n[0]+'">'+esc(n[1])+'</button>').join("");
-    $("#histNav").querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{const el=document.getElementById(b.dataset.go); if(!el) return; const y=el.getBoundingClientRect().top+window.scrollY-120; window.scrollTo({top:y,behavior:"smooth"})});
+    $("#histNav").querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>scrollToEl(document.getElementById(b.dataset.go),true));
     $("#timeline").innerHTML=TIMELINE.map(t=>'<li class="'+(t[3]?"big":"")+'"><span class="y">'+esc(t[0])+'</span><b>'+esc(t[1])+'</b><p>'+esc(t[2])+'</p></li>').join("");
     $("#symbols").innerHTML=SYMBOLS.map(s=>'<div class="sym">'+ill(s[0],"",{red:"#17140F",green:"#17140F",gold:"#FBF8F2",paper2:"#FBF8F2"})+'<div><b>'+esc(s[1])+'</b><span>'+esc(s[2])+'</span></div></div>').join("");
     $("#ritual").innerHTML='<div class="row" style="justify-content:space-between;align-items:flex-start;flex-wrap:nowrap"><div><div class="eyebrow" style="color:#D9B866">El ritual de Hannover</div><h3>Cómo se bebe una Lüttje Lage</h3></div>'+ill("krug","",{ink:"#FBF8F2",gold:"#17140F"})+'</div>'+
@@ -2836,9 +2852,24 @@ const SECTIONS = [
   ["grupo","El grupo","Escribir, votar, quedar"]
 ];
 const secNo=id=>{const i=SECTIONS.findIndex(s=>s[0]===id); return "Nº "+String(i+1).padStart(2,"0")};
+/* Lleva un apartado justo debajo de la cabecera (y de la barra de capítulos, si la hay), y corrige si algo cambia de tamaño al cargar */
+function stickyOffset(){
+  const top=document.querySelector("header.top"); let h=top?top.getBoundingClientRect().bottom:0;
+  const sn=document.querySelector("#v-"+S.tab+" .subnav");
+  if(sn&&sn.offsetParent){ const cs=getComputedStyle(sn); if(cs.position==="sticky") h=Math.max(h,parseFloat(cs.top)||0)+sn.offsetHeight; }
+  return h+10;
+}
+function scrollToEl(el,smooth){
+  if(!el) return;
+  const go=b=>{ document.documentElement.style.scrollBehavior=b==="smooth"?"":"auto"; window.scrollTo({top:Math.max(0,el.getBoundingClientRect().top+window.scrollY-stickyOffset()),behavior:b}); document.documentElement.style.scrollBehavior=""; };
+  const t0=Date.now(); go(smooth?"smooth":"auto");
+  [smooth?700:250,1200].forEach(t=>setTimeout(()=>{ if(userScrollAt>t0) return; if(Math.abs(el.getBoundingClientRect().top-stickyOffset())>4) go("auto"); },t));
+}
+let userScrollAt=0;
+["touchstart","wheel","keydown"].forEach(ev=>window.addEventListener(ev,()=>{userScrollAt=Date.now()},{passive:true}));
 function goSection(id){
   $("#tocHost").innerHTML="";
-  if(id==="cerv"){ show("historia"); requestAnimationFrame(()=>requestAnimationFrame(()=>{const el=$("#h-cerveza"); if(el){document.documentElement.style.scrollBehavior="auto"; window.scrollTo(0,el.getBoundingClientRect().top+window.scrollY-150); document.documentElement.style.scrollBehavior="";}})); return; }
+  if(id==="cerv"){ show("historia"); requestAnimationFrame(()=>requestAnimationFrame(()=>scrollToEl($("#h-cerveza")))); return; }
   show(id);
 }
 function openToc(){
@@ -3207,6 +3238,36 @@ function openHotel(){
   const showDist=ll=>{ const w=walkInfo(ll,HOTEL), d=$("#hcDist"); if(d) d.textContent=w.d<.06?"Ya estás en el hotel.":"Estás a "+w.ds+" del hotel · "+(w.min>40?"mejor en taxi o en transporte":"unos "+w.min+" min a pie")+"."; };
   if(GEO) showDist(GEO.ll);
   else if(navigator.permissions&&navigator.geolocation) navigator.permissions.query({name:"geolocation"}).then(p=>{ if(p.state==="granted") navigator.geolocation.getCurrentPosition(pos=>showDist([pos.coords.latitude,pos.coords.longitude]),()=>{},{maximumAge:60000,timeout:10000}); }).catch(()=>{});
+}
+
+/* Restaurantes del programa: historia, curiosidades y personajes (fuentes: web del restaurante, Guía Michelin, Wikipedia, hannover.de, staev.de) */
+const REST={
+  schorse:{ph:{f:"img/rest_schorse.jpg",py:"55%",cap:"El Leineschloss y el ala del Parlamento",by:"Gerd Fahrenhorst",lic:"CC BY 4.0",url:"https://commons.wikimedia.org/wiki/File:Leineschloss_mit_Plenarsaalgeb%C3%A4ude,_Oktober_2017.jpg"},
+   story:"Schorse ocupa el ala moderna del Leineschloss, sede del Parlamento de Baja Sajonia, con terraza sobre el azud del Leine. Su lema es «cocina francesa con servicio inglés»: platos clásicos franceses que se terminan en la mesa desde un carrito. Lo lleva la familia Lühmann, que en el mismo edificio tiene VOTUM, con dos estrellas Michelin.",
+   facts:[
+    ["El nombre","Schorse es una forma popular de Georg. El restaurante honra al bisabuelo de la familia, «Schorse», que abrió la primera taberna familiar en la Kramerstraße del casco antiguo."],
+    ["Cuna de un rey","En este palacio nació en 1660 Jorge Luis de Hannover, que en 1714 se convertiría en Jorge I de Gran Bretaña, el primer rey de la casa de Hannover en Londres."],
+    ["De convento a palacio","Fue un convento franciscano hasta 1533. En 1636 el duque Jorge de Calenberg lo convirtió en residencia de los Güelfos, y Leibniz vivió aquí doce años."],
+    ["Visitas ilustres","Por sus salones pasaron Pedro el Grande, el príncipe Eugenio de Saboya y el duque de Marlborough; el káiser Guillermo II se alojó en él una veintena de veces."],
+    ["Un misterio","En 2016, durante las obras, aparecieron huesos que se creyeron del conde Königsmarck, el amante de la princesa Sofía Dorotea desaparecido en 1694. Las pruebas lo descartaron."],
+    ["Del fuego al Parlamento","Laves le dio en el siglo XIX su pórtico de seis columnas corintias. Ardió en los bombardeos de 1943 y, reconstruido, acoge desde 1962 el Parlamento regional."],
+    ["La plaza","Desde 2015 la entrada da a la Hannah-Arendt-Platz, en honor a la filósofa, nacida en 1906 en Linden, hoy un barrio de Hannover."]],
+   drink:"<b>De la carta:</b> la Guía Michelin destaca su sopa de pescado y el bourguignon de buey charolés."},
+  stav:{ph:{f:"img/rest_stav.jpg",cap:"La StäV por dentro",py:"60%"},
+   story:"La «StäV» es la sucursal en Hannover, desde 2001, de un local de culto de la política alemana: la Ständige Vertretung que dos hosteleros de Bonn, Friedel Drautzburg y Harald Grunert, abrieron en Berlín en 1997, cuando el Gobierno se mudó del Rin al Spree. Es una cervecería renana, de cerveza Kölsch y cocina de Colonia, con las paredes cubiertas de fotos y carteles de la política alemana, como el original de Berlín.",
+   facts:[
+    ["El nombre","Entre 1974 y 1990 las dos Alemanias no se trataban como países extranjeros y, en lugar de embajadas, tenían «representaciones permanentes» (Ständige Vertretungen): la de la RFA en Berlín Este y la de la RDA en Bonn."],
+    ["Los fundadores","Drautzburg, que regentaba una taberna en Bonn desde 1970, fue ayudante de campaña de Willy Brandt. Su socio lo resumía así: «Friedel es el ministro de Exteriores y yo, el de Interior»."],
+    ["Política en la mesa","Los políticos de Hannover adoptaron pronto el local: según la casa, aquí se han llegado a celebrar negociaciones de coalición."],
+    ["Fútbol","Retransmite en directo los partidos del Hannover 96."],
+    ["Costumbre renana","La Kölsch se sirve en vasos estrechos de 0,2 l (Stange), y el camarero los va reponiendo hasta que se tapa el vaso con el posavasos."]],
+   drink:"<b>Qué pedir:</b> una Kölsch, la cerveza de Colonia, con la cocina renana de la casa."}
+};
+function restHTML(id){
+  const r=REST[id]; if(!r) return "";
+  return '<div class="restlore"><figure class="plate beerph" style="--py:'+r.ph.py+'"><div class="frame"><img src="'+r.ph.f+'" alt="'+esc(r.ph.cap)+'" loading="lazy" decoding="async" onerror="this.closest(\'figure\').hidden=true"></div><figcaption>'+esc(r.ph.cap)+'</figcaption></figure>'+
+    (r.ph.by?'<div class="phcred">Foto: <a href="'+r.ph.url+'" target="_blank" rel="noopener">'+esc(r.ph.by)+' · '+esc(r.ph.lic)+' · Wikimedia Commons</a></div>':'')+
+    '<details class="restmore"><summary>Historia, curiosidades y personajes</summary><p>'+esc(r.story)+'</p><ul class="bfacts">'+r.facts.map(f=>'<li><b>'+esc(f[0])+'</b>'+esc(f[1])+'</li>').join("")+'</ul><p class="drink">'+r.drink+'</p></details></div>';
 }
 
 /* Arranque */
