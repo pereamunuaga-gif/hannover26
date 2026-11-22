@@ -1,0 +1,271 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Garante//Hannover 26//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Hannover 26
+X-WR-TIMEZONE:Europe/Berlin
+BEGIN:VEVENT
+UID:vuelo-lh1125-barcelona-t1-francfort-t1-20261125T085500Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261125T085500Z
+DTEND:20261125T110500Z
+SUMMARY:Vuelo LH1125 · Barcelona T1 → Fráncfort T1
+DESCRIPTION:09:55–12:05\nHannover 26 · Garante para Intecat
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vuelo LH1125 · Barcelona T1 → Fráncfort T1
+TRIGGER:-PT45M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vuelo-lh44-francfort-t1-hannover-20261125T122500Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261125T122500Z
+DTEND:20261125T132000Z
+SUMMARY:Vuelo LH44 · Fráncfort T1 → Hannover
+DESCRIPTION:13:25–14:20\nHannover 26 · Garante para Intecat
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vuelo LH44 · Fráncfort T1 → Hannover
+TRIGGER:-PT45M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:check-in-en-el-hotel-20261125T140000Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261125T140000Z
+DTEND:20261125T143000Z
+SUMMARY:Check-in en el hotel
+DESCRIPTION:desde las 15:00\nHannover 26 · Garante para Intecat
+LOCATION:me and all hotel Hannover\, Aegidientorplatz 3\, 30159 Hannover
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Check-in en el hotel
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:enc25-20261125T180000Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261125T180000Z
+DTEND:20261125T183000Z
+SUMMARY:Encuentro en el vestíbulo del hotel
+DESCRIPTION:19:00 · punto de encuentro en el vestíbulo\; salida conjunta
+  hacia el restaurante\nHannover 26 · Garante para Intecat
+LOCATION:me and all hotel Hannover\, Aegidientorplatz 3\, 30159 Hannover
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Encuentro en el vestíbulo del hotel
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:schorse-20261125T183000Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261125T183000Z
+DTEND:20261125T190000Z
+SUMMARY:Cena de bienvenida en Schorse
+DESCRIPTION:19:30 · cena conjunta de bienvenida\nHannover 26 · Garante p
+ ara Intecat
+LOCATION:Schorse im Leineschloss\, Hannah-Arendt-Platz 1\, 30159 Hannover
+GEO:52.3693;9.7334
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Cena de bienvenida en Schorse
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:enc26-20261126T093000Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261126T093000Z
+DTEND:20261126T100000Z
+SUMMARY:Encuentro en el vestíbulo del hotel
+DESCRIPTION:10:30 · punto de encuentro en el vestíbulo del hotel me and 
+ all Hannover\nHannover 26 · Garante para Intecat
+LOCATION:me and all hotel Hannover\, Aegidientorplatz 3\, 30159 Hannover
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Encuentro en el vestíbulo del hotel
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:wg-20261126T093000Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261126T093000Z
+DTEND:20261126T110000Z
+SUMMARY:Visita a la sede central del Grupo WERTGARANTIE
+DESCRIPTION:10:30–12:00 · visita a las instalaciones y encuentro con el
+  equipo\nHannover 26 · Garante para Intecat
+LOCATION:WERTGARANTIE Breite Straße 8\, 30159 Hannover
+GEO:52.3701;9.7404
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Visita a la sede central del Grupo WERTGARANTIE
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:traslado-20261126T110000Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261126T110000Z
+DTEND:20261126T112000Z
+SUMMARY:Traslado a Herrenhausen
+DESCRIPTION:12:00–12:20 · en taxi a los jardines reales\nHannover 26 ·
+  Garante para Intecat
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Traslado a Herrenhausen
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:grosser-20261126T112000Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261126T112000Z
+DTEND:20261126T123000Z
+SUMMARY:Jardines de Herrenhausen: Großer Garten y gruta
+DESCRIPTION:12:20–13:30 · Gran Jardín (Großer Garten)\, gruta de Niki
+  de Saint Phalle y vistas del palacio\nHannover 26 · Garante para Inteca
+ t
+LOCATION:Großer Garten Herrenhausen
+GEO:52.3866;9.6987
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Jardines de Herrenhausen: Großer Garten y gruta
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:regreso-20261126T123000Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261126T123000Z
+DTEND:20261126T125000Z
+SUMMARY:Regreso al centro de Hannover
+DESCRIPTION:13:30–13:50 · vuelta al centro para el almuerzo\nHannover 2
+ 6 · Garante para Intecat
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Regreso al centro de Hannover
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:stav-20261126T130000Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261126T130000Z
+DTEND:20261126T141500Z
+SUMMARY:Almuerzo en Ständige Vertretung
+DESCRIPTION:14:00–15:15 · almuerzo conjunto en un restaurante del centr
+ o\nHannover 26 · Garante para Intecat
+LOCATION:Ständige Vertretung\, Friedrichswall 10\, 30159 Hannover
+GEO:52.3682;9.7414
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Almuerzo en Ständige Vertretung
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:paseo-20261126T141500Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261126T141500Z
+DTEND:20261126T153000Z
+SUMMARY:Paseo por el centro histórico
+DESCRIPTION:15:15–16:30 · Neues Rathaus\, Aegidienkirche y casco antigu
+ o\nHannover 26 · Garante para Intecat
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Paseo por el centro histórico
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:descanso-20261126T153000Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261126T153000Z
+DTEND:20261126T170000Z
+SUMMARY:Tiempo libre y descanso en el hotel
+DESCRIPTION:16:30–18:00 · antes del mercado de Navidad\nHannover 26 · 
+ Garante para Intecat
+LOCATION:me and all hotel Hannover\, Aegidientorplatz 3\, 30159 Hannover
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tiempo libre y descanso en el hotel
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:xmas-20261126T170000Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261126T170000Z
+DTEND:20261126T184500Z
+SUMMARY:Visita al mercado de Navidad
+DESCRIPTION:18:00–19:45 · mercado tradicional\, mercado histórico\, pu
+ eblo navideño finlandés y degustación de Glühwein y especialidades lo
+ cales\nHannover 26 · Garante para Intecat
+LOCATION:Weihnachtsmarkt Marktkirche Hannover
+GEO:52.3721;9.7343
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Visita al mercado de Navidad
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:xmascena-20261126T190000Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261126T190000Z
+DTEND:20261126T193000Z
+SUMMARY:Cena conjunta en el mercadillo
+DESCRIPTION:20:00 · cena conjunta en los puestos del mercado de Navidad\n
+ Hannover 26 · Garante para Intecat
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Cena conjunta en el mercadillo
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:salida-hacia-el-aeropuerto-20261127T063000Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261127T063000Z
+DTEND:20261127T070000Z
+SUMMARY:Salida hacia el aeropuerto
+DESCRIPTION:07:30\nHannover 26 · Garante para Intecat
+LOCATION:me and all hotel Hannover\, Aegidientorplatz 3\, 30159 Hannover
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Salida hacia el aeropuerto
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vuelo-lx815-hannover-zurich-20261127T083500Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261127T083500Z
+DTEND:20261127T095500Z
+SUMMARY:Vuelo LX815 · Hannover → Zúrich
+DESCRIPTION:09:35–10:55\nHannover 26 · Garante para Intecat
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vuelo LX815 · Hannover → Zúrich
+TRIGGER:-PT45M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:vuelo-lx1954-zurich-barcelona-t1-20261127T112000Z@hannover26
+DTSTAMP:20261122T092745Z
+DTSTART:20261127T112000Z
+DTEND:20261127T130500Z
+SUMMARY:Vuelo LX1954 · Zúrich → Barcelona T1
+DESCRIPTION:12:20–14:05\nHannover 26 · Garante para Intecat
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Vuelo LX1954 · Zúrich → Barcelona T1
+TRIGGER:-PT45M
+END:VALARM
+END:VEVENT
+END:VCALENDAR
